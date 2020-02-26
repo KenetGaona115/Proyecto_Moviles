@@ -14,7 +14,16 @@ class _SplashScreenState extends State {
   @override
   void initState() {
     // TODO: implement initState
-    
+    super.initState();
+    Future.delayed(Duration(milliseconds: 4000)).then(
+      (_){
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => Login()
+          ),
+        );
+      }
+    );
   }
 
   @override
