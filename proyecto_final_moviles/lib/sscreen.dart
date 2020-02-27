@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:proyecto_final_moviles/Login/login.dart';
+import 'package:proyecto_final_moviles/Login/inicio.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -15,11 +15,11 @@ class _SplashScreenState extends State {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(milliseconds: 4000)).then(
+    Future.delayed(Duration(milliseconds: 5000)).then(
       (_){
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (_) => Login()
+            builder: (_) => Inicio()
           ),
         );
       }
