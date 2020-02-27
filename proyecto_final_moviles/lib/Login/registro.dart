@@ -20,7 +20,7 @@ class _RegistroState extends State<Registro> {
             children: <Widget>[
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
                   child: Image.network(
                     "https://pngimage.net/wp-content/uploads/2018/06/uber-icon-png-1.png",
                     height: 100,
@@ -29,6 +29,23 @@ class _RegistroState extends State<Registro> {
                 ),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "INGRESE LOS DATOS",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
+                ),
+              )
+            ],
+          ),
+          // Entrada de nombre completo
+          /*
           Row(
             children: <Widget>[
               Padding(
@@ -42,6 +59,7 @@ class _RegistroState extends State<Registro> {
               )
             ],
           ),
+          */
           SizedBox(
             height: 6.0,
           ),
@@ -53,10 +71,45 @@ class _RegistroState extends State<Registro> {
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(),
-                  hintText: 'Escribe tu nombre...'
+                  hintText: 'Escribe tu nombre'
                   ),
             ),
           ),
+
+          //Entrada de user name
+          /*
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                child: Text(
+                  "Nombre de usuario:",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            ],
+          ),
+          */
+          SizedBox(
+            height: 6.0,
+          ),
+          Container(
+            width: 370.0,
+            height: 50,
+            child: TextField(
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(),
+                  hintText: 'Escribe tu nombre de usuario'
+                  ),
+            ),
+          ),
+
+          // entrada de email
+          /*
           Row(
             children: <Widget>[
               Padding(
@@ -68,6 +121,7 @@ class _RegistroState extends State<Registro> {
               )
             ],
           ),
+          */
           SizedBox(
             height: 6.0,
           ),
@@ -79,16 +133,47 @@ class _RegistroState extends State<Registro> {
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(),
-                  hintText: 'alguien@xpert.com'
+                  hintText: 'ingresa_tu_email@xpert.com'
               ),
             ),
           ),
+          /*
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                child: Text(
+                  "Numero de telefono",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            ],
+          ),
+          */
+          SizedBox(
+            height: 6.0,
+          ),
+          Container(
+            width: 370.0,
+            height: 50,
+            child: TextField(
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(),
+                  hintText: 'Escribe tu numero de telefono'
+                  ),
+            ),
+          ),
+          //Etrada de contraseña
           Row(
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(18, 20, 0, 0),
                 child: Text(
-                  "Password:",
+                  "Contraseña",
                   style: TextStyle(color: Colors.white),
                 ),
               )
@@ -109,12 +194,13 @@ class _RegistroState extends State<Registro> {
                     borderSide: BorderSide(color: Colors.white)),
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
-                hintText: 'Password',
+                hintText: 'Ingresa tu contrsaseña',
               ),
             ),
           ),
           Container(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Checkbox(
                     value: box,
@@ -139,14 +225,14 @@ class _RegistroState extends State<Registro> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 MaterialButton(
-                  height: 50.0,
+                  height: 40.0,
                   minWidth: 350.0,
                   shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(10),
                   ),
-                  color: Theme.of(context).buttonColor,
+                  color: Colors.black,
                   child: Text(
-                    "REGISTRARSE",
+                    "CREAR CUENTA",
                     style: TextStyle(
                       color: Theme.of(context).textSelectionColor,
                       fontSize: 18,
@@ -155,23 +241,7 @@ class _RegistroState extends State<Registro> {
                   ),
                   onPressed: () {},
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  child: Text(
-                    "¿Ya tienes una cuenta?",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Text(
-                    "Ingresa",
-                    style: TextStyle(
-                        color: Colors.white,
-                        decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
+                
               ],
             ),
           ),

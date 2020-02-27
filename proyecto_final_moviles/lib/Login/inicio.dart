@@ -37,30 +37,40 @@ class Inicio extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(10),
             child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10),
+              ),
               child: Text(
                 "REGISTRATE",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.blue,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold
                 ),
               ),
               height: 40,
               minWidth: 350,
-              color: Theme.of(context).buttonColor,
+              color: Colors.black,
               onPressed: () {
                 _navigateToRegistro();
               },
             ),
           ),
           MaterialButton(
+            shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10),
+            ),
             child: Text(
               "INGRESA",
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
+                fontSize: 18
               ),
             ),
             height: 40,
             minWidth: 350,
-            color: Theme.of(context).buttonColor,
+            color: Colors.black,
             onPressed: () {
               _navigateToLogin();
             },

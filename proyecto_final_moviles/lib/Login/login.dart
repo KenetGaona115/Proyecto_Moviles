@@ -58,7 +58,7 @@ class _LoginState extends State<Login> {
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(),
-                    hintText: "nombre de usuario"
+                    hintText: "Nombre de usuario"
                 ),
               ),
             ),
