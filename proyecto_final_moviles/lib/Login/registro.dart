@@ -241,7 +241,6 @@ class _RegistroState extends State<Registro> {
                   ),
                   onPressed: () {},
                 ),
-                
               ],
             ),
           ),
