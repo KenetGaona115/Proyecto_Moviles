@@ -41,7 +41,7 @@ class Inicio extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(10),
               ),
               child: Text(
-                "REGISTRATE",
+                "INGRESA",
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 18,
@@ -50,9 +50,9 @@ class Inicio extends StatelessWidget {
               ),
               height: 40,
               minWidth: 350,
-              color: Colors.black,
+              color: Colors.black, 
               onPressed: () {
-                _navigateToRegistro();
+                _navigateToLogin();
               },
             ),
           ),
@@ -61,7 +61,7 @@ class Inicio extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(10),
             ),
             child: Text(
-              "INGRESA",
+              "REGISTRA",
               style: TextStyle(
                 color: Colors.blue,
                 fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class Inicio extends StatelessWidget {
             minWidth: 350,
             color: Colors.black,
             onPressed: () {
-              _navigateToLogin();
+              _navigateToRegistro();
             },
           ),
         ],
