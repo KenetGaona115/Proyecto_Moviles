@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final_moviles/Home/home.dart';
 
 class Login extends StatefulWidget {
   Login({Key key}) : super(key: key);
@@ -14,7 +15,9 @@ class _LoginState extends State<Login> {
     final name = TextEditingController();
     
     _navigateTo() {
-      
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_)=>Home())
+      );
     }
 
     return Scaffold(

@@ -58,7 +58,7 @@ class _SplashScreenState extends State {
                         padding: EdgeInsets.only(top: 10.0),
                       ),
                       Text(
-                        "Splash Screen",
+                        "Bienvenido",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

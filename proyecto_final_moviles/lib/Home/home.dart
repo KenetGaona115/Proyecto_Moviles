@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Utiles/constans.dart';
+import 'package:proyecto_final_moviles/Utiles/drawer.dart';
 import 'package:proyecto_final_moviles/Utiles/search.dart';
 
 class Home extends StatefulWidget {
@@ -14,8 +15,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Back_Color,
+      backgroundColor: Back_Color, 
       appBar: menu,
+      drawer:MenuLateral(),
       body: Column(
         children: <Widget>[
           Container(
