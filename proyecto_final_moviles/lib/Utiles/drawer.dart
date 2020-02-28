@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final_moviles/Usuario/perfil_user.dart';
 
 class MenuLateral extends StatelessWidget {
   @override
@@ -32,7 +33,11 @@ class MenuLateral extends StatelessWidget {
           ),
           new ListTile(
             title: Text("Perfil"),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_)=>PerfilUser())
+              );
+            },
           ),
           new ListTile(
             title: Text("Favoitos"),
