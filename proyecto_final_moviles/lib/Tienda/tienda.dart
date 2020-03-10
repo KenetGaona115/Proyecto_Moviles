@@ -16,7 +16,7 @@ class _StoreState extends State<Store> {
         title: Text("Tienda $x"),
       ),
       body: Column(
-        children: <Widget>[
+        children: <Widget>[ 
           Text("data")
         ],
       ),

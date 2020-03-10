@@ -16,7 +16,13 @@ class _PaymentState extends State<Payment> {
       ),
       body: Column(
         children: <Widget>[
-          Text("data")
+          Card(
+            child: Row(
+              children: <Widget>[
+                Text("")
+              ],
+            ),
+          ),
         ],
       ),
     );
