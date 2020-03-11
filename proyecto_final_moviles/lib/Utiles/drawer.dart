@@ -12,7 +12,7 @@ class MenuLateral extends StatelessWidget {
             accountEmail: Text("user_mail@gmail.com"),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(
+                    image: NetworkImage(//imagen de fondo para el user
                         "https://ichef.bbci.co.uk/news/660/cpsprodpb/6AFE/production/_102809372_machu.jpg"),
                     fit: BoxFit.cover)),
             currentAccountPicture:
