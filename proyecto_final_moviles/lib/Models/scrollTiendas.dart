@@ -57,7 +57,7 @@ class _ScrollTiendaState extends State<ScrollTienda> {
                     alignment: Alignment.center,
                     children: <Widget>[
                       CircleAvatar(
-                        backgroundImage: NetworkImage(model.logo),
+                        backgroundImage: NetworkImage(_checkImage()),
                         radius: 70,
                       )
                     ],
@@ -81,5 +81,13 @@ class _ScrollTiendaState extends State<ScrollTienda> {
         ),
       ),
     );
+  }
+
+  _checkImage(){
+    if(model.logo == null){
+      return "https://cdn1.iconfinder.com/data/icons/the-basics/100/link-broken-chain-512.png";
+    }
+    else 
+    return model.logo;
   }
 }

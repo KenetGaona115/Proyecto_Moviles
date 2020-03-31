@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final_moviles/Tienda/itemTienda.dart';
 
-class Store extends StatefulWidget {
-  Store({Key key}) : super(key: key);
+class ShowStore extends StatefulWidget {
+  Store tienda;
+  ShowStore({Key key, @required this.tienda}) : super(key: key);
 
   @override
-  _StoreState createState() => _StoreState();
+  _ShowStoreState createState() => _ShowStoreState();
 }
 
-class _StoreState extends State<Store> {
+class _ShowStoreState extends State<ShowStore> {
   var x = "Tienda x";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tienda $x"),
+        title: Text("${widget.tienda.nombre}"),
       ),
       body: Column(
         children: <Widget>[ 

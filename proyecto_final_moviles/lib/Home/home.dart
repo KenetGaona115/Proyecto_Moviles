@@ -1,7 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proyecto_final_moviles/Home/bloc/homebloc_bloc.dart';
+import 'package:proyecto_final_moviles/Models/categoria.dart';
 import 'package:proyecto_final_moviles/Models/home_list.dart';
 import 'package:proyecto_final_moviles/Models/scrollCategory.dart';
 import 'package:proyecto_final_moviles/Models/scrollTiendas.dart';
+import 'package:proyecto_final_moviles/Tienda/itemTienda.dart';
+import 'package:proyecto_final_moviles/Tienda/tienda.dart';
 import 'package:proyecto_final_moviles/Utiles/constans.dart';
 import 'package:proyecto_final_moviles/Utiles/drawer.dart';
 import 'package:proyecto_final_moviles/Utiles/search.dart';
@@ -14,82 +20,83 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController _textFilter;
+  HomeblocBloc _bloc;
+
   var menu = new SearchAppBar();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Back_Color,
-      drawer: MenuLateral(),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-            child: Container(
-              child: _search(),
-              color: Colors.red,
-            ),
-          ),
-          _categoryWidget(),
-          Container(
-            child:  _productWidget(this.context),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-Widget _search() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              height: 40,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color:Colors.lightBlueAccent,
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Search Products",
-                    hintStyle: TextStyle(fontSize: 12),
-                    contentPadding:
-                        EdgeInsets.only(left: 10, right: 10, bottom: 0, top: 5),
-                    prefixIcon: Icon(Icons.search, color: Colors.black54)),
-              ),
-            ),
-          ),
-          SizedBox(width: 20),
-         //_icon(Icons.filter_list, color: Colors.black54),
-        ],
-      ),
-    );
+        backgroundColor: Back_Color,
+        drawer: MenuLateral(),
+        body: BlocProvider(
+          create: (context) {
+            _bloc = HomeblocBloc()..add(InitEvent());
+            return _bloc;
+          },
+          child: BlocBuilder<HomeblocBloc, HomeblocState>(
+              builder: (context, state) {
+            if (state is InitialLoad) {
+              return Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    child: Container(
+                      child: _search(),
+                    ),
+                  ),
+                  _categoryWidget(),
+                  Container(
+                    child: _productWidget(this.context),
+                  )
+                ],
+              );
+            }
+          }),
+        ));
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return  Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[_search()],
-      );
-  }
+  //Llamamos para mostrar las tiendas
   Widget _categoryWidget() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       height: 80,
-      child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: HomeList.categoryList
-              .map((category) => ScrollCategorias(
-                    model: category,
-                  ))
-              .toList()),
+      child: GestureDetector(
+        onTap: () {
+          //Obtenemos el elemento seleccionado en la lista de categorias
+          //HomeList.categoryList[HomeList.categoryList.indexWhere((categoria) => categoria.liked == true)].id;
+        },
+        child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: _bloc.getCategoryList
+                .map((category) => ScrollCategorias(
+                      model: category,
+                    ))
+                .toList()),
+      ),
     );
   }
 
+//widget para poder llamar a la barra de busueda
+  List<Store> _filtroCategoria(int x) {
+    List<Store> tempList = [];
+    for (int i = 0; i < HomeList.restaurantList.length; i++) {
+      if (x == HomeList.restaurantList[i].cat_number)
+        tempList.add(HomeList.restaurantList[i]);
+    }
+    return tempList;
+  }
+
+//Widget para llamar a la lista de categorias de productos
+  List<Store>_filtroText(String x){
+    if (x == null) {
+      return _bloc.getStoreList;
+    }else
+     return _bloc.getStoreListFilter;
+  }
+
+//filtro de categoria, regresa la lista de stores por categoria que se selecciono
   Widget _productWidget(context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -103,10 +110,64 @@ Widget _search() {
               crossAxisSpacing: 20),
           padding: EdgeInsets.only(left: 20),
           scrollDirection: Axis.vertical,
-          children: HomeList.restaurantList
+          children: _bloc.getStoreList
               .map((product) => ScrollTienda(
                     tienda: product,
                   ))
               .toList()),
     );
   }
+
+  Widget _search() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              height: 40,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: Colors.lightBlueAccent,
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: TextField(
+                controller: _textFilter,
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "Busca un restaurante...",
+                    hintStyle: TextStyle(fontSize: 12),
+                    prefixIcon: IconButton(
+                      color: Colors.black54,
+                      icon: Icon(Icons.search),
+                      onPressed: (){
+                        setState(() {
+                          _filtroText(_textFilter.toString());
+                        });
+                      },
+                      )
+                ),
+              ),
+            ),
+          ),
+          SizedBox(width: 20),
+          //_icon(Icons.filter_list, color: Colors.black54),
+        ],
+      ),
+    );
+  }
+
+
+/*
+//regresa la lista de los restaurantes favoritos
+List<Store> _filtroFavoritos() {
+  return HomeList.restaurantList.where((i) => i.liked).toList();
+}
+*/
+
+/*
+ _filtroCategoria(HomeList
+                  .categoryList[HomeList.categoryList
+                      .indexWhere((categoria) => categoria.liked == true)]
+                  .id)
+*/
+}
