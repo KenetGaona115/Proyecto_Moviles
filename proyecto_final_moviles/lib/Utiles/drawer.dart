@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final_moviles/Carrito/carrito.dart';
 import 'package:proyecto_final_moviles/Usuario/perfil_user.dart';
 
 class MenuLateral extends StatelessWidget {
@@ -40,7 +41,12 @@ class MenuLateral extends StatelessWidget {
             },
           ),
           new ListTile(
-            title: Text("Favoitos"),
+            title: Text("Carrito"),
+            onTap: (){
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => Carrito())
+              );
+            },
           ),
           new ListTile(
             title: Text("Pedidos"),

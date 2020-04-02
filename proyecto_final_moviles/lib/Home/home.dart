@@ -20,7 +20,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TextEditingController _textFilter;
+  List<Store> _textFilter;
+  bool isSearching = false;
   HomeblocBloc _bloc;
 
   var menu = new SearchAppBar();
@@ -88,14 +89,6 @@ class _HomeState extends State<Home> {
     return tempList;
   }
 
-//Widget para llamar a la lista de categorias de productos
-  List<Store>_filtroText(String x){
-    if (x == null) {
-      return _bloc.getStoreList;
-    }else
-     return _bloc.getStoreListFilter;
-  }
-
 //filtro de categoria, regresa la lista de stores por categoria que se selecciono
   Widget _productWidget(context) {
     return Container(
@@ -110,7 +103,7 @@ class _HomeState extends State<Home> {
               crossAxisSpacing: 20),
           padding: EdgeInsets.only(left: 20),
           scrollDirection: Axis.vertical,
-          children: _bloc.getStoreList
+          children: (isSearching?_textFilter :_bloc.getStoreList)
               .map((product) => ScrollTienda(
                     tienda: product,
                   ))
@@ -131,43 +124,30 @@ class _HomeState extends State<Home> {
                   color: Colors.lightBlueAccent,
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: TextField(
-                controller: _textFilter,
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: "Busca un restaurante...",
-                    hintStyle: TextStyle(fontSize: 12),
-                    prefixIcon: IconButton(
+                    hintStyle: TextStyle(fontSize: 18),
+                    prefixIcon: Icon(Icons.search,
                       color: Colors.black54,
-                      icon: Icon(Icons.search),
-                      onPressed: (){
-                        setState(() {
-                          _filtroText(_textFilter.toString());
-                        });
-                      },
                       )
                 ),
+                onChanged: (name){
+                  setState(() {
+                    if(name !=""){
+                      print(name);
+                    _textFilter = _bloc.getStoreList.where((x)=> x.nombre.toUpperCase().contains(name.toUpperCase())).toList();
+                     isSearching = true;
+                    }else
+                    isSearching = false;
+                  });
+                },
               ),
             ),
           ),
-          SizedBox(width: 20),
           //_icon(Icons.filter_list, color: Colors.black54),
         ],
       ),
     );
   }
-
-
-/*
-//regresa la lista de los restaurantes favoritos
-List<Store> _filtroFavoritos() {
-  return HomeList.restaurantList.where((i) => i.liked).toList();
-}
-*/
-
-/*
- _filtroCategoria(HomeList
-                  .categoryList[HomeList.categoryList
-                      .indexWhere((categoria) => categoria.liked == true)]
-                  .id)
-*/
 }
