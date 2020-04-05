@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:proyecto_final_moviles/Models/categoria.dart';
 import 'package:proyecto_final_moviles/Tienda/itemTienda.dart';
 
@@ -77,30 +76,6 @@ class HomeblocBloc extends Bloc<HomeblocEvent, HomeblocState> {
           .toList();
       _documentsListCategory = category.documents;
 
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  //cargamos la lista filtrada
-  Future<bool> _loadTextFilter(String e) async {
-    try {
-      var stores = await _firestore.collection("stores").getDocuments();
-      _storeListFilter = stores.documents
-          .map((stores) => Store(
-              categoria: stores["categoria"],
-              nombre: stores["nombre"],
-              logo: stores["imagen"],
-              liked: stores["liked"],
-              cat_number: stores["categoryID"],
-              isSelected: stores["isSelected"],
-              id: stores["IDstore"]))
-          .toList();
-      _storeListFilter
-          .where((f) => f.nombre.toUpperCase() == e.toUpperCase())
-          .toList();
-      _documentsListStoreFilter = stores.documents;
       return true;
     } catch (e) {
       return false;

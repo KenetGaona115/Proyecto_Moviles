@@ -23,6 +23,7 @@ class _HomeState extends State<Home> {
   List<Store> _textFilter;
   bool isSearching = false;
   HomeblocBloc _bloc;
+  int cat_number = Returned.x;
 
   var menu = new SearchAppBar();
 
@@ -63,19 +64,13 @@ class _HomeState extends State<Home> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       height: 80,
-      child: GestureDetector(
-        onTap: () {
-          //Obtenemos el elemento seleccionado en la lista de categorias
-          //HomeList.categoryList[HomeList.categoryList.indexWhere((categoria) => categoria.liked == true)].id;
-        },
-        child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: _bloc.getCategoryList
-                .map((category) => ScrollCategorias(
-                      model: category,
-                    ))
-                .toList()),
-      ),
+      child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: _bloc.getCategoryList
+              .map((category) => ScrollCategorias(
+                    model: category,
+                  ))
+              .toList()),
     );
   }
 
@@ -103,7 +98,7 @@ class _HomeState extends State<Home> {
               crossAxisSpacing: 20),
           padding: EdgeInsets.only(left: 20),
           scrollDirection: Axis.vertical,
-          children: (isSearching?_textFilter :_bloc.getStoreList)
+          children: (isSearching ? _textFilter : _bloc.getStoreList)
               .map((product) => ScrollTienda(
                     tienda: product,
                   ))
@@ -128,24 +123,28 @@ class _HomeState extends State<Home> {
                     border: InputBorder.none,
                     hintText: "Busca un restaurante...",
                     hintStyle: TextStyle(fontSize: 18),
-                    prefixIcon: Icon(Icons.search,
+                    prefixIcon: Icon(
+                      Icons.search,
                       color: Colors.black54,
-                      )
-                ),
-                onChanged: (name){
+                    )),
+                //mientras haya texto en la barra de busqueda se efectuara el filtro
+                onChanged: (name) {
                   setState(() {
-                    if(name !=""){
+                    if (name != "") {
                       print(name);
-                    _textFilter = _bloc.getStoreList.where((x)=> x.nombre.toUpperCase().contains(name.toUpperCase())).toList();
-                     isSearching = true;
-                    }else
-                    isSearching = false;
+                      _textFilter = _bloc.getStoreList
+                          .where((x) => x.nombre
+                              .toUpperCase()
+                              .contains(name.toUpperCase()))
+                          .toList();
+                      isSearching = true;
+                    } else
+                      isSearching = false;
                   });
                 },
               ),
             ),
           ),
-          //_icon(Icons.filter_list, color: Colors.black54),
         ],
       ),
     );
