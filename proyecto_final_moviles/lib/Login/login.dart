@@ -1,153 +1,197 @@
+import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:proyecto_final_moviles/Home/home.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+
+
+import 'package:proyecto_final_moviles/Login/page.dart';
+
+import 'package:proyecto_final_moviles/Login/registerpage.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class Login extends StatefulWidget {
-  Login({Key key}) : super(key: key);
+  final String title;
 
-  @override
-  _LoginState createState() => _LoginState();
+  Login({Key key, this.title}) : super(key: key);
+
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginPageState extends State<Login> {
+  TextEditingController _emailController = TextEditingController();
+
+  TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final password = TextEditingController();
-    final name = TextEditingController();
-    
-    _navigateTo() {
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (_)=>Home())
-      );
-    }
-
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
-      body: Column(
-        children: <Widget>[
-          Row(
+      resizeToAvoidBottomPadding: false,
+
+      body: Form(
+        key: _formKey,
+
+
+        child: Container(
+
+          child: Stack(
             children: <Widget>[
-              Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Image.network(
-                      "https://pngimage.net/wp-content/uploads/2018/06/uber-icon-png-1.png",
-                      height: 250,
-                      ),
-                  ),
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                child: Text(
-                  "Nombre completo:",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-            child: Container(
-              width: 370.0,
-              height: 50,
-              child: TextField(
-                controller: name,
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(),
-                    hintText: "Nombre de usuario"
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  "Password",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: 370.0,
-            height: 50,
-            child: TextField(
-              controller: password,
-              obscureText: true,
-              decoration: InputDecoration(
-                filled: false,
-                enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white)),
-                fillColor: Colors.white,
-                border: OutlineInputBorder(),
-                hintText: 'Password',
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                MaterialButton(
-                  height: 50.0,
-                  minWidth: 368.0,
+              Container(),
+              Container(
+                child: new Card(
+                  color: Colors.grey[100],
+                  margin: new EdgeInsets.only(
+                      left: 20.0, right: 20.0, top: 250.0, bottom: 80.0),
                   shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10),
-                  ),
-                  color: Colors.black,
+                      borderRadius: BorderRadius.circular(10.0)),
+                  elevation: 8.0,
+                  child: new Padding(
+                    padding: new EdgeInsets.all(25.0),
+                    child: new Column(
+                      children: <Widget>[
+                        new Container(
+                          child: new TextFormField(
+                            maxLines: 1,
+                            controller: _emailController,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.text,
+                            decoration: new InputDecoration(
+                                labelText: 'Correo', 
+                                hintText: 'manuel.vm@gmail.com',
+                                icon: Icon(Icons.email)),
+                            onFieldSubmitted: (value) {
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Escribe un correo electronico';
+                              }
+                            },
+                          ),
+                        ),
+                        new Container(
+                          child: new TextFormField(
+                            maxLines: 1,
+                            controller: _passwordController,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.text,
+                            decoration: new InputDecoration(
+                              labelText: 'Contraseña',
+                              hintText: '*******',
+                              icon: Icon(
+                                Icons.vpn_key,
+                                color: Colors.black,
+                              ),
+                            ),
+                            onFieldSubmitted: (value) {
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Escribe tu contraeña';
+                              }
+                            },
+                          ),
+                        ),
+                        new Padding(padding: new EdgeInsets.only(top: 30.0)),
+                        new RaisedButton(
+                          color: Colors.blue,
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
+                          padding: new EdgeInsets.all(16.0),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              new Text(
+                                'Entrar',
+                                style: new TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
+                          onPressed: () {
+                            Entrar();
+                          },
+                        ),
+                        Divider(),
+                        new RaisedButton(
+                          color: Colors.blue,
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
+                          padding: new EdgeInsets.all(16.0),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              new Text(
+                                'Registrar',
+                                style: new TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
+                          onPressed: () => _pushPage(context,RegisterPage()),
+                        ),
+
+
+                Padding(
+
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+
                   child: Text(
-                    "ENTRAR",
-                    style: TextStyle(
-                      color: Theme.of(context).textSelectionColor,
-                      fontSize: 18,
-                      fontFamily: "AkzidenzGrotesk",
+
+                    "¿Aun no tienes cuenta?",
+
+                    style: TextStyle(color: Colors.black),
+
+                  ),
+
+                ),
+                      ],
                     ),
                   ),
-                  onPressed: () {
-                    _navigateTo();
-                  },
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
-                  child: Text(
-                    "¿olvisate tu password?",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Text(
-                    "¿Aun no tienes cuenta?",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                Text(
-                  "REGISTRATE",
-                  style: TextStyle(
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
+
+  void Entrar() async {
+
+    FirebaseUser user;
+
+    try {
+      user = (await _auth.signInWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text))
+          .user;
+    } catch (e) {
+      print(e.toString());
+    } finally {
+      if (user != null) {
+        // sign in successful!
+
+        _pushPage(context, Pintar());
+      } else {
+        // sign in unsuccessful
+
+        print('salir');
+
+        // ex: prompt the user to try again
+
+      }
+    }
+  }
 }
 
-//funcion de validacion
-
+void _pushPage(BuildContext context, Widget page) {
+  Navigator.of(context).push(
+    MaterialPageRoute<void>(builder: (_) => page),
+  );
+}
