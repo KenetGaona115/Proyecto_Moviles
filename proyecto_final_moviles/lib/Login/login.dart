@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:proyecto_final_moviles/Home/home.dart';
 
 import 'package:proyecto_final_moviles/Login/page.dart';
 
@@ -30,13 +30,9 @@ class _LoginPageState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-
       body: Form(
         key: _formKey,
-
-
         child: Container(
-
           child: Stack(
             children: <Widget>[
               Container(),
@@ -59,11 +55,10 @@ class _LoginPageState extends State<Login> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.text,
                             decoration: new InputDecoration(
-                                labelText: 'Correo', 
+                                labelText: 'Correo',
                                 hintText: 'manuel.vm@gmail.com',
                                 icon: Icon(Icons.email)),
-                            onFieldSubmitted: (value) {
-                            },
+                            onFieldSubmitted: (value) {},
                             validator: (value) {
                               if (value.isEmpty) {
                                 return 'Escribe un correo electronico';
@@ -85,8 +80,7 @@ class _LoginPageState extends State<Login> {
                                 color: Colors.black,
                               ),
                             ),
-                            onFieldSubmitted: (value) {
-                            },
+                            onFieldSubmitted: (value) {},
                             validator: (value) {
                               if (value.isEmpty) {
                                 return 'Escribe tu contraeña';
@@ -134,23 +128,15 @@ class _LoginPageState extends State<Login> {
                               ),
                             ],
                           ),
-                          onPressed: () => _pushPage(context,RegisterPage()),
+                          onPressed: () => _pushPage(context, RegisterPage()),
                         ),
-
-
-                Padding(
-
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-
-                  child: Text(
-
-                    "¿Aun no tienes cuenta?",
-
-                    style: TextStyle(color: Colors.black),
-
-                  ),
-
-                ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          child: Text(
+                            "¿Aun no tienes cuenta?",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -164,7 +150,6 @@ class _LoginPageState extends State<Login> {
   }
 
   void Entrar() async {
-
     FirebaseUser user;
 
     try {
@@ -177,7 +162,7 @@ class _LoginPageState extends State<Login> {
       if (user != null) {
         // sign in successful!
 
-        _pushPage(context, Pintar());
+        _pushPage(context,Home());
       } else {
         // sign in unsuccessful
 

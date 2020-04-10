@@ -21,6 +21,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Store> _textFilter;
+  List<Store> _lsitStores;
   bool isSearching = false;
   HomeblocBloc _bloc;
   int cat_number = Returned.x;
@@ -32,14 +33,17 @@ class _HomeState extends State<Home> {
     return Scaffold(
         backgroundColor: Back_Color,
         drawer: MenuLateral(),
+        resizeToAvoidBottomPadding: false,
         body: BlocProvider(
           create: (context) {
             _bloc = HomeblocBloc()..add(InitEvent());
+
             return _bloc;
           },
           child: BlocBuilder<HomeblocBloc, HomeblocState>(
               builder: (context, state) {
             if (state is InitialLoad) {
+              _getListSotres();
               return Column(
                 children: <Widget>[
                   Padding(
@@ -53,6 +57,12 @@ class _HomeState extends State<Home> {
                     child: _productWidget(this.context),
                   )
                 ],
+              );
+            } else if (state is InitialLoadError) {
+              return Scaffold(
+                body: Column(
+                  children: <Widget>[Text("Error de carga")],
+                ),
               );
             }
           }),
@@ -98,7 +108,7 @@ class _HomeState extends State<Home> {
               crossAxisSpacing: 20),
           padding: EdgeInsets.only(left: 20),
           scrollDirection: Axis.vertical,
-          children: (isSearching ? _textFilter : _bloc.getStoreList)
+          children: (isSearching ? _textFilter : _lsitStores)
               .map((product) => ScrollTienda(
                     tienda: product,
                   ))
@@ -132,7 +142,7 @@ class _HomeState extends State<Home> {
                   setState(() {
                     if (name != "") {
                       print(name);
-                      _textFilter = _bloc.getStoreList
+                      _textFilter = _lsitStores
                           .where((x) => x.nombre
                               .toUpperCase()
                               .contains(name.toUpperCase()))
@@ -148,5 +158,9 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  _getListSotres() {
+    _lsitStores = _bloc.getStoreList;
   }
 }

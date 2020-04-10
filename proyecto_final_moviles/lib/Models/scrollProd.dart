@@ -19,8 +19,7 @@ class _ScrollProdState extends State<ScrollProd> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
+    return Padding(
         padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
         child: GestureDetector(
           onTap: () {
@@ -57,8 +56,7 @@ class _ScrollProdState extends State<ScrollProd> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
   _checkImage() {

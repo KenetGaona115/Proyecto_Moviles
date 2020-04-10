@@ -13,9 +13,6 @@ class HomeblocBloc extends Bloc<HomeblocEvent, HomeblocState> {
   List<Store> _storeList;
   List<Store> _storeListFilter;
   List<Categoria> _categoryList;
-  List<DocumentSnapshot> _documentsListStore;
-  List<DocumentSnapshot> _documentsListCategory;
-  List<DocumentSnapshot> _documentsListStoreFilter;
 
   List<Store> get getStoreList => _storeList;
   List<Store> get getStoreListFilter => _storeListFilter;
@@ -62,7 +59,6 @@ class HomeblocBloc extends Bloc<HomeblocEvent, HomeblocState> {
               isSelected: stores["isSelected"],
               id: stores["IDstore"]))
           .toList();
-      _documentsListStore = stores.documents;
 
       var category = await _firestore.collection("categoria").getDocuments();
       _categoryList = category.documents
@@ -74,7 +70,6 @@ class HomeblocBloc extends Bloc<HomeblocEvent, HomeblocState> {
             ),
           )
           .toList();
-      _documentsListCategory = category.documents;
 
       return true;
     } catch (e) {

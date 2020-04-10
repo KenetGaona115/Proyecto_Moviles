@@ -20,70 +20,63 @@ class _ScrollTiendaState extends State<ScrollTienda> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).pushNamed('/detail');
-        setState(() {});
-      },
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
-        child: GestureDetector(
-          onTap: () {
-            print(model.nombre);
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => ShowStore(tienda: model)));
-          },
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.all(Radius.circular(30))),
-            margin: EdgeInsets.symmetric(vertical: !model.isSelected ? 20 : 0),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                Positioned(
-                    left: 0,
-                    top: 0,
-                    child: IconButton(
-                        icon: Icon(
-                          model.liked ? Icons.favorite : Icons.favorite_border,
-                          color: model.liked ? Colors.red : Colors.white,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            model.liked = !model.liked;
-                          });
-                        })),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: model.isSelected ? 15 : 0),
-                    Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(_checkImage()),
-                          radius: 70,
-                        )
-                      ],
-                    ),
-                    // SizedBox(height: 5),
-                    Text("${model.nombre}",
-                        style: TextStyle(
-                          fontSize: model.isSelected ? 16 : 14,
-                        )),
-                    Text(
-                      "${model.categoria}",
-                      style: TextStyle(
-                        fontSize: model.isSelected ? 14 : 12,
-                        color: Colors.orange,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
+      child: GestureDetector(
+        onTap: () {
+          print(model.nombre);
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => ShowStore(tienda: model)));
+        },
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.lightBlueAccent,
+              borderRadius: BorderRadius.all(Radius.circular(30))),
+          margin: EdgeInsets.symmetric(vertical: !model.isSelected ? 20 : 0),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Positioned(
+                  left: 0,
+                  top: 0,
+                  child: IconButton(
+                      icon: Icon(
+                        model.liked ? Icons.favorite : Icons.favorite_border,
+                        color: model.liked ? Colors.red : Colors.white,
                       ),
+                      onPressed: () {
+                        setState(() {
+                          model.liked = !model.liked;
+                        });
+                      })),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(_checkImage()),
+                        radius: 70,
+                      )
+                    ],
+                  ),
+                  // SizedBox(height: 5),
+                  Text("${model.nombre}",
+                      style: TextStyle(
+                        fontSize: model.isSelected ? 16 : 14,
+                      )),
+                  Text(
+                    "${model.categoria}",
+                    style: TextStyle(
+                      fontSize: model.isSelected ? 14 : 12,
+                      color: Colors.orange,
                     ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
