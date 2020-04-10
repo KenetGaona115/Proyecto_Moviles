@@ -4,7 +4,7 @@ abstract class StoreEvent extends Equatable {
   const StoreEvent();
 }
 
-class InitEvent extends StoreEvent {
+class InitEventStore extends StoreEvent {
   @override
   // TODO: implement props
   List<Object> get props => [];

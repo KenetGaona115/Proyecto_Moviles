@@ -31,18 +31,7 @@ class HomeblocBloc extends Bloc<HomeblocEvent, HomeblocState> {
         yield InitialLoad(_categoryList, _storeList);
       } else
         yield InitialLoadError("no hay datos cargados");
-    } 
-    /*
-    else if (event is TextSearch) {
-      
-      if (await _loadTextFilter(x)) {
-        yield TextSearchLoad(_storeListFilter);
-      } else
-        yield TextSearchLoadError("no se encontro ningun resultado");
-        
-    
     }
-    */
   }
 
   //metodo para cargar las listas de los elementos necesarios para el inicio <<Catgorias, Stores>>

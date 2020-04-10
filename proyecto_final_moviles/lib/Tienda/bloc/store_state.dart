@@ -9,20 +9,20 @@ class StoreInitial extends StoreState {
   List<Object> get props => [];
 }
 
-class InitialLoad extends StoreState {
+class InitialLoadStore extends StoreState {
   
   final List<dynamic> listProd;
 
-  InitialLoad(this.listProd);
+  InitialLoadStore(this.listProd);
 
   @override
   List<Object> get props => [listProd];
 }
 
-class InitialLoadError extends StoreState {
+class InitialLoadStoreError extends StoreState {
   final String err;
 
-  InitialLoadError(this.err);
+  InitialLoadStoreError(this.err);
   @override
   List<Object> get props => [err];
 }

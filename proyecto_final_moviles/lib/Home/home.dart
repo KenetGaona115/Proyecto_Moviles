@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proyecto_final_moviles/Home/bloc/homebloc_bloc.dart';
-import 'package:proyecto_final_moviles/Models/categoria.dart';
-import 'package:proyecto_final_moviles/Models/home_list.dart';
 import 'package:proyecto_final_moviles/Models/scrollCategory.dart';
 import 'package:proyecto_final_moviles/Models/scrollTiendas.dart';
 import 'package:proyecto_final_moviles/Tienda/itemTienda.dart';
@@ -84,16 +82,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-//widget para poder llamar a la barra de busueda
-  List<Store> _filtroCategoria(int x) {
-    List<Store> tempList = [];
-    for (int i = 0; i < HomeList.restaurantList.length; i++) {
-      if (x == HomeList.restaurantList[i].cat_number)
-        tempList.add(HomeList.restaurantList[i]);
-    }
-    return tempList;
-  }
-
 //filtro de categoria, regresa la lista de stores por categoria que se selecciono
   Widget _productWidget(context) {
     return Container(
@@ -139,8 +127,8 @@ class _HomeState extends State<Home> {
                     )),
                 //mientras haya texto en la barra de busqueda se efectuara el filtro
                 onChanged: (name) {
-                  setState(() {
-                    if (name != "") {
+                  if (name != "") {
+                    setState(() {
                       print(name);
                       _textFilter = _lsitStores
                           .where((x) => x.nombre
@@ -148,9 +136,9 @@ class _HomeState extends State<Home> {
                               .contains(name.toUpperCase()))
                           .toList();
                       isSearching = true;
-                    } else
-                      isSearching = false;
-                  });
+                    });
+                  } else
+                    isSearching = false;
                 },
               ),
             ),

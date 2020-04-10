@@ -1,18 +1,21 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:proyecto_final_moviles/Models/scrollCategory.dart';
 import 'package:proyecto_final_moviles/Producto/producto.dart';
 import 'package:proyecto_final_moviles/Tienda/itemTienda.dart';
+import 'package:proyecto_final_moviles/Tienda/tienda.dart';
 
 part 'store_event.dart';
 part 'store_state.dart';
 
 class StoreBloc extends Bloc<StoreEvent, StoreState> {
+  Store tienda = ReturnStore.t;
   final Firestore _firestore = Firestore.instance;
   List<Producto> _prodList;
-  List<DocumentSnapshot> _documentsListProd;
+  List<Producto> get getListProd =>_prodList;
+
   @override
   StoreState get initialState => StoreInitial();
 
@@ -21,11 +24,11 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
     StoreEvent event,
   ) async* {
     // TODO: implement mapEventToState
-    if (event is InitEvent) {
+    if (event is InitEventStore) {
       if (await _loadListsProducts()) {
-        yield InitialLoad(_prodList);
+        yield InitialLoadStore(_prodList);
       }else
-      yield InitialLoadError("no se pudieron obtener los datos");
+      yield InitialLoadStoreError("no se pudieron obtener los datos");
     }
   }
 
@@ -35,12 +38,21 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
       _prodList = prod.documents
           .map((prod) => Producto(
               idStore: prod["idStore"],
-              descripcion: prod["desc"],
+              descripcion: prod["descripcion"],
               imagen: prod["imagen"],
               nombre: prod["nombre"],
               precio: prod["precio"]))
           .toList();
-      _documentsListProd = prod.documents;
+
+          for (var item in _prodList) {
+            print(item.nombre);
+            print(item.descripcion);
+            print(item.idStore);
+            print(item.imagen);
+            print(item.precio.toString());
+            print("");
+          }
+
       return true;
     } catch (e) {
       return false;
