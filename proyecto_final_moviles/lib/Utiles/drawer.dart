@@ -14,14 +14,13 @@ class MenuLateral extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(//imagen de fondo para el user
-                        "https://ichef.bbci.co.uk/news/660/cpsprodpb/6AFE/production/_102809372_machu.jpg"),
+                        "https://imagenescityexpress.scdn6.secure.raxcdn.com/sites/default/files/2019-06/que-hacer-guadalajara-poco-presupuesto.jpg"),
                     fit: BoxFit.cover)),
-            currentAccountPicture:
-              CircleAvatar(
-                radius: 100,
-                backgroundImage: NetworkImage("https://ca-times.brightspotcdn.com/dims4/default/50efff7/2147483647/strip/true/crop/3000x4540+0+0/resize/840x1271!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F83%2Fa3%2F851ffd104bd0986ed347756dfac9%2Fd63f471a8356ccda64ee91a57761765ec662853f.jpg"),
-                
-              ),
+            currentAccountPicture: CircleAvatar(
+              radius: 110,
+              backgroundImage: NetworkImage(
+                  "https://i.pinimg.com/736x/e8/23/f9/e823f9ae8d85e1e0b65d463c0d8e7dc5.jpg"),
+            ),
           ),
           Ink(
             color: Colors.indigo,
@@ -35,17 +34,15 @@ class MenuLateral extends StatelessWidget {
           new ListTile(
             title: Text("Perfil"),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (_)=>PerfilUser())
-              );
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => PerfilUser()));
             },
           ),
           new ListTile(
             title: Text("Carrito"),
-            onTap: (){
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => Carrito())
-              );
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => Carrito()));
             },
           ),
           new ListTile(

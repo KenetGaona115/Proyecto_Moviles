@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proyecto_final_moviles/Carrito/carrito.dart';
 import 'package:proyecto_final_moviles/Home/bloc/homebloc_bloc.dart';
 import 'package:proyecto_final_moviles/Models/scrollCategory.dart';
 import 'package:proyecto_final_moviles/Models/scrollTiendas.dart';
@@ -45,10 +46,16 @@ class _HomeState extends State<Home> {
               return Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                     child: Container(
                       child: _search(),
                     ),
+                  ),
+                  Divider(
+                    thickness: 5,
+                    color: Colors.black,
+                    indent: 10,
+                    endIndent: 10,
                   ),
                   _categoryWidget(),
                   Container(
@@ -85,7 +92,7 @@ class _HomeState extends State<Home> {
 //filtro de categoria, regresa la lista de stores por categoria que se selecciono
   Widget _productWidget(context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      //margin: EdgeInsets.symmetric(vertical: 5),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * .7,
       child: GridView(
@@ -106,7 +113,7 @@ class _HomeState extends State<Home> {
 
   Widget _search() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -143,6 +150,15 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
+          IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+                size: MediaQuery.of(context).size.height * .05,
+              ),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => Carrito()));
+              })
         ],
       ),
     );

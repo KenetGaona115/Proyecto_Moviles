@@ -21,7 +21,7 @@ class _ScrollTiendaState extends State<ScrollTienda> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
+      padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
       child: GestureDetector(
         onTap: () {
           print(model.nombre);
@@ -31,9 +31,9 @@ class _ScrollTiendaState extends State<ScrollTienda> {
         child: Container(
           decoration: BoxDecoration(
               color: Colors.lightBlueAccent,
-              borderRadius: BorderRadius.all(Radius.circular(30))),
+              borderRadius: BorderRadius.all(Radius.circular(35))),
           margin: EdgeInsets.symmetric(vertical: !model.isSelected ? 20 : 0),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
@@ -62,16 +62,16 @@ class _ScrollTiendaState extends State<ScrollTienda> {
                       )
                     ],
                   ),
-                  // SizedBox(height: 5),
+                  SizedBox(height: 2),
                   Text("${model.nombre}",
                       style: TextStyle(
-                        fontSize: model.isSelected ? 16 : 14,
+                        fontSize:20,
                       )),
                   Text(
                     "${model.categoria}",
                     style: TextStyle(
                       fontSize: model.isSelected ? 14 : 12,
-                      color: Colors.orange,
+                      color: Colors.yellow,
                     ),
                   ),
                 ],

@@ -32,7 +32,7 @@ class _ShowStoreState extends State<ShowStore> {
             return _bloc;
           },
           child: BlocBuilder<StoreBloc, StoreState>(builder: (context, state) {
-           return _bodyWidget();
+            return _bodyWidget();
           }),
         ));
   }
@@ -64,7 +64,33 @@ class _ShowStoreState extends State<ShowStore> {
       );
     }
   }
-  
+
+  Widget _returnToDebug() {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            "Contenido no diponible",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold
+            ),
+          ), 
+          SizedBox(
+            height: 5,
+          ),
+          Image.network(
+            "https://cdn0.iconfinder.com/data/icons/file-24/64/file-10-512.png",
+            height: 150,
+          ),
+          SizedBox(height: 20),
+          CircularProgressIndicator(),
+        ],
+      ),
+    );
+  }
+
 //Cuerpo de la pagina
   Widget _bodyWidget() {
     return Column(
@@ -77,8 +103,11 @@ class _ShowStoreState extends State<ShowStore> {
           width: MediaQuery.of(context).size.width,
           child: Image.network(_checkImage()),
         ),
-        SizedBox(
-          height: 5,
+        Divider(
+          thickness: 5,
+          color: Colors.blueGrey,
+          indent: 10,
+          endIndent: 10,
         ),
         Column(
           children: <Widget>[
@@ -114,7 +143,13 @@ class _ShowStoreState extends State<ShowStore> {
                 ),
               ),
             ),
-            Container(child: _widgetProd())
+            Divider(
+              thickness: 5,
+              color: Colors.blueGrey,
+              indent: 10,
+              endIndent: 10,
+            ),
+            Container(child: _returnToDebug())
           ],
         ),
       ],
