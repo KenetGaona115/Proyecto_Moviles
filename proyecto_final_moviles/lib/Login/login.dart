@@ -33,6 +33,7 @@ class _LoginPageState extends State<Login> {
       body: Form(
         key: _formKey,
         child: Container(
+          color: Colors.blueGrey,
           child: Stack(
             children: <Widget>[
               Container(),
