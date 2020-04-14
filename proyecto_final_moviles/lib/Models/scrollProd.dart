@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:proyecto_final_moviles/Producto/pordDetail.dart';
 import 'package:proyecto_final_moviles/Producto/producto.dart';
 
 class ScrollProd extends StatefulWidget {
@@ -20,43 +22,79 @@ class _ScrollProdState extends State<ScrollProd> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
-        child: GestureDetector(
-          onTap: () {
-            //funcion para navegar a detalle
-          },
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.all(Radius.circular(30))),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(_checkImage()),
-                          radius: 70,
-                        )
-                      ],
+      padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_)=> ProductDetail(prod: widget.prod))
+          );
+        },
+        child: Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(18.0),
+              side: BorderSide(color: Colors.black),
+          ),
+          color: Colors.lightBlueAccent,
+          elevation: 5,
+          child: Row(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Container(
+                    width: 120.0,
+                    height: 120.0,
+                    margin: EdgeInsets.fromLTRB(5, 2, 0, 0),
+                    decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: new DecorationImage(
+                          fit: BoxFit.fill,
+                          image: new NetworkImage(_checkImage())),
                     ),
-                    // SizedBox(height: 5),
-                    Text(
-                      "${model.nombre}",
-                      style: TextStyle(),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.attach_money),
+                      Text(
+                        "${model.precio}",
+                        style: TextStyle(fontSize: 25),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Flexible(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    RichText(
+                      text: TextSpan(
+                        style: DefaultTextStyle.of(context).style,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: '${model.nombre.toUpperCase()}\n\n',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          TextSpan(
+                            text: model.descripcion.length < 15?'${model.descripcion}':'${model.descripcion.substring(0,15)}..',
+                            style: TextStyle(
+                              fontSize: 20
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
   }
 
   _checkImage() {

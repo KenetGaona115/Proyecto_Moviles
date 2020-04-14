@@ -19,6 +19,7 @@ class ShowStore extends StatefulWidget {
 
 class _ShowStoreState extends State<ShowStore> {
   StoreBloc _bloc;
+  List<Producto> _listProd;
 
   @override
   Widget build(BuildContext context) {
@@ -48,58 +49,57 @@ class _ShowStoreState extends State<ShowStore> {
 //Regresamos el Widget correspondiente
   Widget _widgetProd() {
     ReturnStore._retStore(widget.tienda);
+    _returnListProd();
     try {
-      return ListView(
-        scrollDirection: Axis.vertical,
-        children: _bloc.getListProd
-            .map((producto) => ScrollProd(
-                  prod: producto,
-                ))
-            .toList(),
+      if (_listProd.length > 0) {
+        return Container(
+        height: MediaQuery.of(context).size.height * 0.51,
+        child: ListView.builder(
+          itemCount:_listProd.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ScrollProd(
+              prod: _listProd[index]);
+          },
+        ),
       );
+      } else {
+        return null;
+      }
     } catch (e) {
       print(e);
       return Container(
-        child: Text("Contenido no disponible"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Contenido no diponible",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Image.network(
+              "https://cdn0.iconfinder.com/data/icons/file-24/64/file-10-512.png",
+              height: 150,
+            ),
+            SizedBox(height: 20),
+            CircularProgressIndicator(),
+          ],
+        ),
       );
     }
-  }
-
-  Widget _returnToDebug() {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Contenido no diponible",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold
-            ),
-          ), 
-          SizedBox(
-            height: 5,
-          ),
-          Image.network(
-            "https://cdn0.iconfinder.com/data/icons/file-24/64/file-10-512.png",
-            height: 150,
-          ),
-          SizedBox(height: 20),
-          CircularProgressIndicator(),
-        ],
-      ),
-    );
   }
 
 //Cuerpo de la pagina
   Widget _bodyWidget() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
           height: 1,
         ),
         Container(
-          height: MediaQuery.of(context).size.height * .3,
+          height: MediaQuery.of(context).size.height * .2,
           width: MediaQuery.of(context).size.width,
           child: Image.network(_checkImage()),
         ),
@@ -149,11 +149,25 @@ class _ShowStoreState extends State<ShowStore> {
               indent: 10,
               endIndent: 10,
             ),
-            Container(child: _returnToDebug())
           ],
         ),
+        Material(
+          child: Container(
+            child: SingleChildScrollView(
+              child: _widgetProd(),
+            ),
+          ),
+        )
       ],
     );
+  }
+
+//Hacemos el filtrado de la lista de los productos
+  _returnListProd(){
+    _listProd = (
+      _bloc.getListProd.where(
+        (test)=> test.idStore == widget.tienda.id
+      ).length > 0? _bloc.getListProd.where((test)=> test.idStore == widget.tienda.id).toList():null);
   }
 }
 

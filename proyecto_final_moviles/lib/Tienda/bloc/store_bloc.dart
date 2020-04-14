@@ -43,16 +43,6 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
               nombre: prod["nombre"],
               precio: prod["precio"]))
           .toList();
-
-          for (var item in _prodList) {
-            print(item.nombre);
-            print(item.descripcion);
-            print(item.idStore);
-            print(item.imagen);
-            print(item.precio.toString());
-            print("");
-          }
-
       return true;
     } catch (e) {
       return false;
