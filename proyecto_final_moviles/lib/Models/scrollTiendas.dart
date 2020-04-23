@@ -32,7 +32,7 @@ class _ScrollTiendaState extends State<ScrollTienda> {
           decoration: BoxDecoration(
               color: Colors.lightBlueAccent,
               borderRadius: BorderRadius.all(Radius.circular(35))),
-          margin: EdgeInsets.symmetric(vertical: !model.isSelected ? 20 : 0),
+          margin: EdgeInsets.symmetric(vertical: 25),
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Stack(
             alignment: Alignment.center,

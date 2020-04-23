@@ -224,34 +224,40 @@ class _PerfilUserState extends State<PerfilUser> {
     );
   }
 
+//Constructor
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
-        key: _scaffoldKey,
-        children: <Widget>[
-          _buildCoverImage(screenSize),
-          SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: screenSize.height / 6.4),
-                  _buildProfileImage(),
-                  _buildFullName(),
-                  _buildStatus(context),
-                  _buildStatContainer(),
-                  _buildBio(context),
-                  _buildSeparator(screenSize),
-                  SizedBox(height: 10.0),
-                  //_buildGetInTouch(context),
-                 // SizedBox(height: 8.0),
-                  _buildButtons(),
-                ],
+      appBar: AppBar(
+        title: Text("Perfil"),
+      ),
+      body: Container(
+        child: Stack(
+          key: _scaffoldKey,
+          children: <Widget>[
+            _buildCoverImage(screenSize),
+            SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: screenSize.height / 5.4),
+                    _buildProfileImage(),
+                    _buildFullName(),
+                    _buildStatus(context),
+                    _buildStatContainer(),
+                    _buildBio(context),
+                    _buildSeparator(screenSize),
+                    SizedBox(height: 10.0),
+                    //_buildGetInTouch(context),
+                   // SizedBox(height: 8.0),
+                    _buildButtons(),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

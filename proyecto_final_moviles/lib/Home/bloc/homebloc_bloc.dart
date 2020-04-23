@@ -46,7 +46,12 @@ class HomeblocBloc extends Bloc<HomeblocEvent, HomeblocState> {
               liked: stores["liked"],
               cat_number: stores["categoryID"],
               isSelected: stores["isSelected"],
-              id: stores["IDstore"]))
+              id: stores["IDstore"],
+              horario: List.from(stores["horario"]),
+              cal: stores["cal"].toDouble(), 
+              tel: stores["tel"]
+              ),
+          )
           .toList();
 
       var category = await _firestore.collection("categoria").getDocuments();

@@ -163,7 +163,7 @@ class _LoginPageState extends State<Login> {
       if (user != null) {
         // sign in successful!
 
-        _pushPage(context,Home());
+        _pushPage(context, Home());
       } else {
         // sign in unsuccessful
 

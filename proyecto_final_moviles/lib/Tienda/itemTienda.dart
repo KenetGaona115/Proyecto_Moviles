@@ -6,5 +6,8 @@ class Store {
   String logo;
   bool liked;
   bool isSelected;
-  Store({this.id,this.nombre,this.categoria,this.logo,this.liked,this.isSelected, this.cat_number});
+  double cal;
+  int tel;
+  List<String> horario;
+  Store({this.id,this.nombre,this.categoria,this.logo,this.liked,this.isSelected, this.cat_number, this.horario, this.cal,this.tel});
 }

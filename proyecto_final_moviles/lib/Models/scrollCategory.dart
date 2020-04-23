@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Models/categoria.dart';
 
-class ScrollCategorias extends StatelessWidget {
-
-  int x;
+class ScrollCategorias extends StatefulWidget {
   final Categoria model;
   ScrollCategorias({Key key, this.model}) : super(key: key);
 
+  @override
+  _ScrollCategoriasState createState() => _ScrollCategoriasState();
+}
+
+class _ScrollCategoriasState extends State<ScrollCategorias> {
+  Categoria model;
+  int x = 0;
+  @override
+  void initState() {
+    super.initState();
+    model = widget.model;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
@@ -24,12 +36,14 @@ class ScrollCategorias extends StatelessWidget {
       ),
       //mandamos el numero de la categoria
       child: GestureDetector(
-        onTap: (){
-         x = model.id;
-         print(x);
-         Returned.retCatNumber(x);
+        onTap: () {
+          setState(() {
+            x = model.id;
+            print(x);
+            Returned.retCatNumber(x);
+          });
         },
-              child: Row(
+        child: Row(
           children: <Widget>[
             model.image != null ? Image.network(model.image) : SizedBox(),
             model.categoria == null
@@ -45,8 +59,8 @@ class ScrollCategorias extends StatelessWidget {
 }
 
 class Returned {
-  static int x;
-  static retCatNumber(int y){
+  static int x = 0;
+  static retCatNumber(int y) {
     Returned.x = y;
   }
 }

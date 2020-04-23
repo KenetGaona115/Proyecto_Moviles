@@ -33,19 +33,14 @@ class MenuLateral extends StatelessWidget {
           ),
           new ListTile(
             title: Text("Perfil"),
+            trailing: Icon(Icons.perm_identity),
             onTap: () {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => PerfilUser()));
             },
           ),
           new ListTile(
-            title: Text("Carrito"),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => Carrito()));
-            },
-          ),
-          new ListTile(
+            trailing: Icon(Icons.fastfood),
             title: Text("Pedidos"),
           )
         ],

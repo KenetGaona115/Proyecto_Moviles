@@ -10,6 +10,7 @@ import 'package:proyecto_final_moviles/Tienda/tienda.dart';
 import 'package:proyecto_final_moviles/Utiles/constans.dart';
 import 'package:proyecto_final_moviles/Utiles/drawer.dart';
 import 'package:proyecto_final_moviles/Utiles/search.dart';
+import 'package:proyecto_final_moviles/sscreen.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -25,8 +26,6 @@ class _HomeState extends State<Home> {
   HomeblocBloc _bloc;
   int cat_number = Returned.x;
 
-  var menu = new SearchAppBar();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +35,7 @@ class _HomeState extends State<Home> {
         body: BlocProvider(
           create: (context) {
             _bloc = HomeblocBloc()..add(InitEvent());
-
+            
             return _bloc;
           },
           child: BlocBuilder<HomeblocBloc, HomeblocState>(
@@ -66,7 +65,22 @@ class _HomeState extends State<Home> {
             } else if (state is InitialLoadError) {
               return Scaffold(
                 body: Column(
-                  children: <Widget>[Text("Error de carga")],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Error de carga"),
+                        FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) => Home())
+                              );
+                            },
+                            child: Text("recargar"))
+                      ],
+                    )
+                  ],
                 ),
               );
             }
@@ -97,10 +111,9 @@ class _HomeState extends State<Home> {
       height: MediaQuery.of(context).size.height * .7,
       child: GridView(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,
-              childAspectRatio: 4 / 3,
-              mainAxisSpacing: 30,
-              crossAxisSpacing: 20),
+            crossAxisCount: 1,
+            childAspectRatio: 4 / 3,
+          ),
           padding: EdgeInsets.only(left: 20),
           scrollDirection: Axis.vertical,
           children: (isSearching ? _textFilter : _lsitStores)
@@ -112,59 +125,61 @@ class _HomeState extends State<Home> {
   }
 
   Widget _search() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              height: 40,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.lightBlueAccent,
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Busca un restaurante...",
-                    hintStyle: TextStyle(fontSize: 18),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.black54,
-                    )),
-                //mientras haya texto en la barra de busqueda se efectuara el filtro
-                onChanged: (name) {
-                  if (name != "") {
-                    setState(() {
-                      print(name);
-                      _textFilter = _lsitStores
-                          .where((x) => x.nombre
-                              .toUpperCase()
-                              .contains(name.toUpperCase()))
-                          .toList();
-                      isSearching = true;
-                    });
-                  } else
-                    isSearching = false;
-                },
+    return SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                height: 40,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.lightBlueAccent,
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: TextField(
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Busca un restaurante...",
+                      hintStyle: TextStyle(fontSize: 18),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Colors.black54,
+                      )),
+                  //mientras haya texto en la barra de busqueda se efectuara el filtro
+                  onChanged: (name) {
+                    if (name != "") {
+                      setState(() {
+                        print(name);
+                        _textFilter = _lsitStores
+                            .where((x) => x.nombre
+                                .toUpperCase()
+                                .contains(name.toUpperCase()))
+                            .toList();
+                        isSearching = true;
+                      });
+                    } else
+                      isSearching = false;
+                  },
+                ),
               ),
             ),
-          ),
-          IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                size: MediaQuery.of(context).size.height * .05,
-              ),
-              onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => Carrito()));
-              })
-        ],
+            IconButton(
+                icon: Icon(
+                  Icons.shopping_cart,
+                  size: MediaQuery.of(context).size.height * .05,
+                ),
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => Carrito()));
+                })
+          ],
+        ),
       ),
     );
   }
 
-  _getListSotres() {
-    _lsitStores = _bloc.getStoreList;
+  _getListSotres() async{
+    _lsitStores =  _bloc.getStoreList;
   }
 }

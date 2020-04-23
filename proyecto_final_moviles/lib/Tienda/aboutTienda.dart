@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Tienda/itemTienda.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutStore extends StatefulWidget {
   Store tienda;
@@ -14,87 +15,101 @@ class _AboutStoreState extends State<AboutStore> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    int x = 3820666;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("About ${widget.tienda.nombre}"),
+        title: Text("Informacion"),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 1,
-            ),
-            Container(
-              height: 100,
-              width: 100,
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(_checkImage()),
-              ),
-            ),
-            Divider(
-              thickness: 5,
-              color: Colors.blueGrey,
-              indent: 10,
-              endIndent: 10,
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "Califiacion del restaurante",
-                  style: TextStyle(fontSize: 20),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            RatingBar(
-              initialRating: 2.5,
-              glowColor: Colors.grey,
-              minRating: 1,
-              direction: Axis.horizontal,
-              itemCount: 5,
-              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-              itemBuilder: (context, _) => Icon(
-                Icons.star,
-                color: Colors.yellow,
-              ),
-              onRatingUpdate: (rating) {
-                print(rating);
-              },
-              ignoreGestures: true,
-            ),
-            _returnTable(),
-            SizedBox(
-              height: 25,
-            ),
-            FlatButton(
-                color: Colors.blueGrey,
-                splashColor: Colors.lightBlue,
-                shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0),
-                    side: BorderSide(color: Colors.black)),
-                onLongPress: () => _displaySnackBar(context),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: MediaQuery.of(context).size.height * .3,
+                child: Stack(
+                  alignment: Alignment(0.0, 0.0),
+                  fit: StackFit.loose,
                   children: <Widget>[
-                    Text(
-                      "Contactar",
-                      style: TextStyle(fontSize: 25),
+                    //Espacio para poner el mapa
+                    Positioned.fill(
+                      bottom: 50,
+                      child: Container(
+                        color: Colors.black,
+                        height: MediaQuery.of(context).size.height * .2,
+                      ),
                     ),
-                    SizedBox(
-                      width: 10,
+                    Positioned(
+                      bottom: 0,
+                      child: CircleAvatar(
+                        radius: MediaQuery.of(context).size.height * .08,
+                        backgroundImage: NetworkImage(_checkImage()),
+                      ),
                     ),
-                    Icon(Icons.call)
                   ],
                 ),
-                onPressed: () {})
-          ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "PUNTUACION",
+                    style: TextStyle(fontSize: 20),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              RatingBar(
+                initialRating: widget.tienda.cal,
+                glowColor: Colors.grey,
+                minRating: 1,
+                direction: Axis.horizontal,
+                itemCount: 5,
+                allowHalfRating: true,
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                onRatingUpdate: (rating) {
+                  print(rating);
+                },
+                ignoreGestures: true,
+              ),
+              _returnTable(),
+              SizedBox(
+                height: 25,
+              ),
+              FlatButton(
+                  color: Colors.blueGrey,
+                  splashColor: Colors.lightBlue,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                      side: BorderSide(color: Colors.black)),
+                  onLongPress: () => _displaySnackBar(context),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        "Contactar",
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Icon(Icons.call)
+                    ],
+                  ),
+                  onPressed: () {
+                    launch("tel://${widget.tienda.tel}");
+                  })
+            ],
+          ),
         ),
       ),
     );
@@ -112,38 +127,38 @@ class _AboutStoreState extends State<AboutStore> {
       rows: [
         DataRow(cells: [
           DataCell(Text('LUNES')),
-          DataCell(Text('1')),
-          DataCell(Text('2')),
+          DataCell(Text('${widget.tienda.horario[0]}')),
+          DataCell(Text('${widget.tienda.horario[1]}')),
         ]),
         DataRow(cells: [
           DataCell(Text('MARTES')),
-          DataCell(Text('1')),
-          DataCell(Text('21')),
+          DataCell(Text('${widget.tienda.horario[2]}')),
+          DataCell(Text('${widget.tienda.horario[3]}')),
         ]),
         DataRow(cells: [
           DataCell(Text('MIERCOLES')),
-          DataCell(Text('12')),
-          DataCell(Text('122')),
+          DataCell(Text('${widget.tienda.horario[4]}')),
+          DataCell(Text('${widget.tienda.horario[5]}')),
         ]),
         DataRow(cells: [
           DataCell(Text('JUEVES')),
-          DataCell(Text('212')),
-          DataCell(Text('4')),
+          DataCell(Text('${widget.tienda.horario[6]}')),
+          DataCell(Text('${widget.tienda.horario[7]}')),
         ]),
         DataRow(cells: [
           DataCell(Text('VIERNES')),
-          DataCell(Text('1')),
-          DataCell(Text('2')),
+          DataCell(Text('${widget.tienda.horario[8]}')),
+          DataCell(Text('${widget.tienda.horario[9]}')),
         ]),
         DataRow(cells: [
           DataCell(Text('SABADO')),
-          DataCell(Text('5')),
-          DataCell(Text('4')),
+          DataCell(Text('${widget.tienda.horario[10]}')),
+          DataCell(Text('${widget.tienda.horario[11]}')),
         ]),
         DataRow(cells: [
           DataCell(Text('DOMINGO')),
-          DataCell(Text('4')),
-          DataCell(Text('5')),
+          DataCell(Text('${widget.tienda.horario[12]}')),
+          DataCell(Text('${widget.tienda.horario[13]}')),
         ]),
       ],
     );
