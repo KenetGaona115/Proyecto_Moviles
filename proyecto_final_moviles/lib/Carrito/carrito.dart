@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_final_moviles/Carrito/itemCarrito.dart';
 import 'package:proyecto_final_moviles/Producto/producto.dart';
 import 'package:proyecto_final_moviles/Utiles/constans.dart';
 

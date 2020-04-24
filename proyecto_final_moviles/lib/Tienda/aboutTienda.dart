@@ -15,7 +15,6 @@ class _AboutStoreState extends State<AboutStore> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    int x = 3820666;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(

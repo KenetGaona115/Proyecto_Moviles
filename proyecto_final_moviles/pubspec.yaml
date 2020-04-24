@@ -42,12 +42,19 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
- 
+  flutter_launcher_icons: "^0.7.3"
+
+flutter_icons:
+  android: true 
+  ios: true
+  image_path: "assets/logoApp.jpeg"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
+  assets:
+    - assets/logoApp.jpeg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -50,8 +50,7 @@ class _SplashScreenState extends State {
                         radius: 70.0,
                         child: CircleAvatar(
                           radius: 60.0,
-                          backgroundImage: NetworkImage(
-                              "https://pngimage.net/wp-content/uploads/2018/06/uber-icon-png-1.png"),
+                          backgroundImage:AssetImage("assets/logoApp.jpeg"),
                         ),
                       ),
                       Padding(

@@ -91,7 +91,7 @@ class _LoginPageState extends State<Login> {
                         ),
                         new Padding(padding: new EdgeInsets.only(top: 30.0)),
                         new RaisedButton(
-                          color: Colors.blue,
+                          color: Colors.black,
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(30.0)),
                           padding: new EdgeInsets.all(16.0),
@@ -101,9 +101,10 @@ class _LoginPageState extends State<Login> {
                               new Text(
                                 'Entrar',
                                 style: new TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white),
+                                    color: Colors.blue,
+                                ),
                               ),
                             ],
                           ),
@@ -113,7 +114,7 @@ class _LoginPageState extends State<Login> {
                         ),
                         Divider(),
                         new RaisedButton(
-                          color: Colors.blue,
+                          color: Colors.black,
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(30.0)),
                           padding: new EdgeInsets.all(16.0),
@@ -123,9 +124,10 @@ class _LoginPageState extends State<Login> {
                               new Text(
                                 'Registrar',
                                 style: new TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white),
+                                    color: Colors.blue,
+                                ),
                               ),
                             ],
                           ),
