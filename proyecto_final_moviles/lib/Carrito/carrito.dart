@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Producto/producto.dart';
 import 'package:proyecto_final_moviles/Utiles/constans.dart';
 
+import '../Pago/met_pagos.dart';
+
 class Carrito extends StatefulWidget {
   Carrito({Key key}) : super(key: key);
 
@@ -66,7 +68,8 @@ class _CarritoState extends State<Carrito> {
             onPressed: (){
               carritoListProd.removeRange(0, carritoListProd.length);
               carritoListCant.removeRange(0, carritoListCant.length);
-              Navigator.pop(context);
+  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) =>Pago()));
             },
           )
         ],

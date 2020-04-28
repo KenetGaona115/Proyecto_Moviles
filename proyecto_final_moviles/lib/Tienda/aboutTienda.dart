@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Tienda/itemTienda.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:proyecto_final_moviles/maps/mapa.dart';
 
 class AboutStore extends StatefulWidget {
   Store tienda;
@@ -101,14 +102,33 @@ class _AboutStoreState extends State<AboutStore> {
                       SizedBox(
                         width: 10,
                       ),
-                      Icon(Icons.call)
+                      Icon(Icons.call),
+                     
+                      
                     ],
                   ),
+                  
+                  
                   onPressed: () {
                     launch("tel://${widget.tienda.tel}");
-                  })
+                  }),
+                  Row(children: <Widget>[
+                    Text("IR"),
+                     IconButton(
+                icon: Icon(
+                  Icons.zoom_out_map,
+                  size: MediaQuery.of(context).size.height * .05,
+                ),
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) =>Mapa()));
+                })
+                  ],)
+                  
             ],
+          
           ),
+          
         ),
       ),
     );

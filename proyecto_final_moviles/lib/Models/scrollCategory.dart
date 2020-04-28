@@ -29,7 +29,7 @@ class _ScrollCategoriasState extends State<ScrollCategorias> {
       height: 40,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        color: model.liked ? Colors.lightBlueAccent : Colors.white54,
+        color: model.liked ? Colors.black : Colors.white54,
         border: Border.all(
             color: model.liked ? Colors.orange : Colors.grey,
             width: model.liked ? 2 : 1),

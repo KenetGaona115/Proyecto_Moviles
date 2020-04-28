@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Carrito/itemCarrito.dart';
 import 'package:proyecto_final_moviles/Producto/producto.dart';
 import 'package:proyecto_final_moviles/Utiles/constans.dart';
+//import 'package:photo_view/photo_view.dart';
 
 class ProductDetail extends StatefulWidget {
   final Producto prod;
@@ -29,6 +30,12 @@ class _ProductDetailState extends State<ProductDetail> {
         children: <Widget>[
           Stack(
             children: <Widget>[
+           /*   PhotoView(
+ imageProvider: imageProvider,
+ minScale: PhotoViewComputedScale.contained * 0.8,
+ maxScale: PhotoViewComputedScale.covered * 1.8,
+ initialScale: PhotoViewComputedScale.contained * 1.1,
+);*/
               Image.network(_checkImage()),
               Positioned(
                   child: Icon(

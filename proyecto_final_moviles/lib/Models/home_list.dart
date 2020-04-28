@@ -12,13 +12,13 @@ class HomeList {
     Categoria(
       categoria: "Sushi",
       id: 2,
-      image: "https://sifu.unileversolutions.com/image/es-MX/recipe-topvisual/2/1260-709/sushi-empanizado-50425579.jpg",
+      image: "https://scontent.fgdl5-3.fna.fbcdn.net/v/t1.0-9/15326531_1688258981504571_1307994158617097759_n.jpg?_nc_cat=107&_nc_sid=85a577&_nc_eui2=AeEHDdX-Ql6CWmG8Sv9cTD51h9gBxYbH0VmH2AHFhsfRWaGMb8LPeIjdFflOk6EzuC6YcLzgMB0qH7vo7oTVzTcS&_nc_ohc=4rL6v2XbsccAX_toh97&_nc_ht=scontent.fgdl5-3.fna&oh=79fa5493843e07c6674b3a00bdb6c47f&oe=5ECBD479",
       liked: true
     ),
     Categoria(
       categoria: "Tacos",
       id: 3,
-      image: "https://dam.cocinafacil.com.mx/wp-content/uploads/2019/08/tacos-campechanos.jpg",
+      image: "https://scontent.fgdl5-3.fna.fbcdn.net/v/t1.0-9/15326531_1688258981504571_1307994158617097759_n.jpg?_nc_cat=107&_nc_sid=85a577&_nc_eui2=AeEHDdX-Ql6CWmG8Sv9cTD51h9gBxYbH0VmH2AHFhsfRWaGMb8LPeIjdFflOk6EzuC6YcLzgMB0qH7vo7oTVzTcS&_nc_ohc=4rL6v2XbsccAX_toh97&_nc_ht=scontent.fgdl5-3.fna&oh=79fa5493843e07c6674b3a00bdb6c47f&oe=5ECBD479",
       liked: false
     ),
     Categoria(
@@ -33,8 +33,8 @@ class HomeList {
       id: 1,
       categoria: "Tacos",
       liked: true,
-      logo: "https://image.freepik.com/vector-gratis/logo-fiery-tacos_54548-10.jpg",
-      nombre: "Tacos la flama",
+      logo: "https://scontent.fgdl5-3.fna.fbcdn.net/v/t1.0-9/15326531_1688258981504571_1307994158617097759_n.jpg?_nc_cat=107&_nc_sid=85a577&_nc_eui2=AeEHDdX-Ql6CWmG8Sv9cTD51h9gBxYbH0VmH2AHFhsfRWaGMb8LPeIjdFflOk6EzuC6YcLzgMB0qH7vo7oTVzTcS&_nc_ohc=4rL6v2XbsccAX_toh97&_nc_ht=scontent.fgdl5-3.fna&oh=79fa5493843e07c6674b3a00bdb6c47f&oe=5ECBD479",
+      nombre: "Tacos",
       isSelected:true,
       cat_number: 3
     ),
@@ -42,16 +42,16 @@ class HomeList {
       id: 2,
       categoria: "Sushi",
       liked: false,
-      logo: "https://static-images.ifood.com.br/image/upload/f_auto,t_high/logosgde/945b659a-0f6d-424a-ac3f-a0e435e814b8_SUSHI_ACIO01.PNG",
-      nombre: "Sushi Express",
+      logo: "https://scontent.fgdl5-3.fna.fbcdn.net/v/t1.0-9/15326531_1688258981504571_1307994158617097759_n.jpg?_nc_cat=107&_nc_sid=85a577&_nc_eui2=AeEHDdX-Ql6CWmG8Sv9cTD51h9gBxYbH0VmH2AHFhsfRWaGMb8LPeIjdFflOk6EzuC6YcLzgMB0qH7vo7oTVzTcS&_nc_ohc=4rL6v2XbsccAX_toh97&_nc_ht=scontent.fgdl5-3.fna&oh=79fa5493843e07c6674b3a00bdb6c47f&oe=5ECBD479",
+      nombre: "Sushi",
       isSelected:false,
       cat_number: 2
     ),
     Store(
       id: 3,
-      categoria: "Hambuergresa",
+      categoria: "Hambuerguesa",
       liked: false,
-      logo: "https://image.winudf.com/v2/image/Y29tLm9uZXppbmUuY2FybHNqcl9pY29uXzE1MDM5NTk4ODlfMDc4/icon.png?w=170&fakeurl=1",
+      logo: "https://scontent.fgdl5-3.fna.fbcdn.net/v/t1.0-9/15326531_1688258981504571_1307994158617097759_n.jpg?_nc_cat=107&_nc_sid=85a577&_nc_ohc=4rL6v2XbsccAX_toh97&_nc_ht=scontent.fgdl5-3.fna&oh=591fa5b2873840cc02582548f6ff2bc2&oe=5ECBD479",
       nombre: "Carl's jr",
       isSelected: false,
       cat_number: 1

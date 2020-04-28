@@ -30,7 +30,7 @@ class _ScrollTiendaState extends State<ScrollTienda> {
         },
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.lightBlueAccent,
+              color: Colors.red[50],
               borderRadius: BorderRadius.all(Radius.circular(35))),
           margin: EdgeInsets.symmetric(vertical: 25),
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -71,7 +71,7 @@ class _ScrollTiendaState extends State<ScrollTienda> {
                     "${model.categoria}",
                     style: TextStyle(
                       fontSize: model.isSelected ? 14 : 12,
-                      color: Colors.yellow,
+                      color: Colors.black,
                     ),
                   ),
                 ],
