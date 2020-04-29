@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Carrito/carrito.dart';
 import 'package:proyecto_final_moviles/Usuario/perfil_user.dart';
+import 'package:proyecto_final_moviles/Utiles/constans.dart';
 
 class MenuLateral extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class MenuLateral extends StatelessWidget {
             ),
           ),
           Ink(
-            color: Colors.indigo,
+            color: PRIMARY_COLOR,
             child: new ListTile(
               title: Text(
                 "MENU DE OPCIONES",
@@ -39,10 +40,10 @@ class MenuLateral extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (_) => PerfilUser()));
             },
           ),
-          new ListTile(
-            trailing: Icon(Icons.fastfood),
-            title: Text("Pedidos"),
-          )
+          // new ListTile(
+          //   trailing: Icon(Icons.fastfood),
+          //   title: Text("Pedidos"),
+          // )
         ],
       ),
     );

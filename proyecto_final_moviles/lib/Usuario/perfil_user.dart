@@ -9,20 +9,20 @@ class PerfilUser extends StatefulWidget {
 }
 
 class _PerfilUserState extends State<PerfilUser> {
- final String _nameUser = "User Name";
+  final String _nameUser = "User Name";
   final String _correo = "alguien@gmail.com";
-  final String _ref =
-      "\"Casa blanca de dos pisos, cerca de un Oxxo\"";
+  final String _ref = "\"Casa blanca de dos pisos, cerca de un Oxxo\"";
   final String _pedidos = "173";
   final String _scores = "4.5";
-   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Widget _buildCoverImage(Size screenSize) {
     return Container(
       height: screenSize.height / 2.6,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage('https://i.pinimg.com/736x/e8/23/f9/e823f9ae8d85e1e0b65d463c0d8e7dc5.jpg'),
+          image: NetworkImage(
+              'https://i.pinimg.com/736x/e8/23/f9/e823f9ae8d85e1e0b65d463c0d8e7dc5.jpg'),
           fit: BoxFit.cover,
         ),
       ),
@@ -36,7 +36,8 @@ class _PerfilUserState extends State<PerfilUser> {
         height: 140.0,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage('https://i.pinimg.com/736x/e8/23/f9/e823f9ae8d85e1e0b65d463c0d8e7dc5.jpg'),
+            image: NetworkImage(
+                'https://i.pinimg.com/736x/e8/23/f9/e823f9ae8d85e1e0b65d463c0d8e7dc5.jpg'),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(80.0),
@@ -131,7 +132,7 @@ class _PerfilUserState extends State<PerfilUser> {
   Widget _buildBio(BuildContext context) {
     TextStyle bioTextStyle = TextStyle(
       fontFamily: 'Spectral',
-      fontWeight: FontWeight.w400,//try changing weight to w500 if not thin
+      fontWeight: FontWeight.w400, //try changing weight to w500 if not thin
       fontStyle: FontStyle.italic,
       color: Color(0xFF799497),
       fontSize: 16.0,
@@ -176,9 +177,8 @@ class _PerfilUserState extends State<PerfilUser> {
           Expanded(
             child: InkWell(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_)=>PerfilSettings())
-                );
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => PerfilSettings()));
               },
               child: Container(
                 height: 40.0,
@@ -245,12 +245,12 @@ class _PerfilUserState extends State<PerfilUser> {
                     _buildProfileImage(),
                     _buildFullName(),
                     _buildStatus(context),
-                    _buildStatContainer(),
-                    _buildBio(context),
+                    //_buildStatContainer(),
+                    //_buildBio(context),
                     _buildSeparator(screenSize),
                     SizedBox(height: 10.0),
                     //_buildGetInTouch(context),
-                   // SizedBox(height: 8.0),
+                    // SizedBox(height: 8.0),
                     _buildButtons(),
                   ],
                 ),
@@ -261,36 +261,50 @@ class _PerfilUserState extends State<PerfilUser> {
       ),
     );
   }
-  _showConfirmDialog(){
-    showDialog(
-      context: context,
-      builder: (buildcontext) {
-        return AlertDialog(
-          title: Text("Alerta"),
-          content: Text("¿Quiere eliminar su cuenta?"),
-          
-          actions: <Widget>[
-            Row(
-              children: <Widget>[
-                RaisedButton(
-                  color: Colors.red,
-              child: Text("Aceptar", style: TextStyle(color: Colors.white),),
-              onPressed: (){ Navigator.of(context).pop(); },
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width *.3,
-            ),
-            RaisedButton(
-              color: Colors.blue,
-              child: Text("Cancelar", style: TextStyle(color: Colors.white),),
-              onPressed: (){ Navigator.of(context).pop(); },
-            )
-              ],
-            )
-          ],
-        );
-      }
-    );
 
+  _showConfirmDialog() {
+    showDialog(
+        context: context,
+        builder: (buildcontext) {
+          return AlertDialog(
+            title: Text("Alerta"),
+            content: Text("¿Quiere eliminar su cuenta?"),
+            actions: <Widget>[
+              Row(
+                children: <Widget>[
+                  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10.0),
+                    ),
+                    color: Colors.red,
+                    child: Text(
+                      "CANCELAR",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .03,
+                  ),
+                  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10.0),
+                    ),
+                    color: Colors.blue,
+                    child: Text(
+                      "ACEPTAR",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              )
+            ],
+          );
+        });
   }
 }

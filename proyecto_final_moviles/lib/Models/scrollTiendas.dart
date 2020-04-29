@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Tienda/itemTienda.dart';
 import 'package:proyecto_final_moviles/Tienda/tienda.dart';
+import 'package:proyecto_final_moviles/Utiles/constans.dart';
 
 class ScrollTienda extends StatefulWidget {
   final Store tienda;
@@ -30,7 +31,7 @@ class _ScrollTiendaState extends State<ScrollTienda> {
         },
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.red[50],
+              color: CARD_COLOR,
               borderRadius: BorderRadius.all(Radius.circular(35))),
           margin: EdgeInsets.symmetric(vertical: 25),
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -64,15 +65,11 @@ class _ScrollTiendaState extends State<ScrollTienda> {
                   ),
                   SizedBox(height: 2),
                   Text("${model.nombre}",
-                      style: TextStyle(
-                        fontSize:20,
-                      )),
+                      style: TEXT_TITLE_STYLE 
+                  ),
                   Text(
                     "${model.categoria}",
-                    style: TextStyle(
-                      fontSize: model.isSelected ? 14 : 12,
-                      color: Colors.black,
-                    ),
+                    style: TEXT_SUBTITLE_STYLE
                   ),
                 ],
               ),

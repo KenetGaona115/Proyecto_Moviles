@@ -17,7 +17,7 @@ class _SplashScreenState extends State {
     super.initState();
     Future.delayed(Duration(milliseconds: 5000)).then(
       (_){
-        Navigator.of(context).push(
+        Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (_) => Inicio()
           ),
@@ -25,6 +25,7 @@ class _SplashScreenState extends State {
       }
     );
   }
+//Willpopscope
 
   @override
   Widget build(BuildContext context) {

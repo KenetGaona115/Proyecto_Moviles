@@ -5,6 +5,7 @@ import 'package:proyecto_final_moviles/Models/scrollProd.dart';
 import 'package:proyecto_final_moviles/Producto/producto.dart';
 import 'package:proyecto_final_moviles/Tienda/bloc/store_bloc.dart';
 import 'package:proyecto_final_moviles/Tienda/itemTienda.dart';
+import 'package:proyecto_final_moviles/Utiles/constans.dart';
 import 'dart:async';
 
 import 'aboutTienda.dart';
@@ -24,6 +25,7 @@ class _ShowStoreState extends State<ShowStore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BACKGROUND_COLOR,
         appBar: AppBar(
           title: Text("${widget.tienda.nombre}"),
         ),
@@ -53,6 +55,7 @@ class _ShowStoreState extends State<ShowStore> {
     try {
       if (_listProd.length > 0) {
         return Container(
+          color: BACKGROUND_COLOR,
         height: MediaQuery.of(context).size.height * 0.51,
         child: ListView.builder(
           itemCount:_listProd.length,
@@ -73,7 +76,7 @@ class _ShowStoreState extends State<ShowStore> {
           children: <Widget>[
             Text(
               "Contenido no diponible",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TEXT_TITLE_STYLE,
             ),
             SizedBox(
               height: 5,
@@ -121,8 +124,7 @@ class _ShowStoreState extends State<ShowStore> {
                       children: <Widget>[
                         Text(
                           "${widget.tienda.categoria}",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                          style: TEXT_TITLE_STYLE
                         ),
                       ],
                     ),

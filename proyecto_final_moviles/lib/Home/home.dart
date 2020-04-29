@@ -20,8 +20,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Store> _textFilter;
-  List<Store> _lsitStores;
+  List<Store> _textFilter = List();
+  List<Store> _lsitStores = List();
   bool isSearching = false;
   HomeblocBloc _bloc;
   int cat_number = Returned.x;
@@ -29,62 +29,69 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Back_Color,
+        backgroundColor: BACKGROUND_COLOR,
         drawer: MenuLateral(),
         resizeToAvoidBottomPadding: false,
-        body: BlocProvider(
-          create: (context) {
-            _bloc = HomeblocBloc()..add(InitEvent());
-            
-            return _bloc;
-          },
-          child: BlocBuilder<HomeblocBloc, HomeblocState>(
-              builder: (context, state) {
-            if (state is InitialLoad) {
-              _getListSotres();
-              return Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                    child: Container(
-                      child: _search(),
-                    ),
-                  ),
-                  Divider(
-                    thickness: 5,
-                    color: Colors.black,
-                    indent: 10,
-                    endIndent: 10,
-                  ),
-                  _categoryWidget(),
-                  Container(
-                    child: _productWidget(this.context),
-                  )
-                ],
-              );
-            } else if (state is InitialLoadError) {
-              return Scaffold(
-                body: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        body: SingleChildScrollView(
+                  child: BlocProvider(
+            create: (context) {
+              _bloc = HomeblocBloc()..add(InitEvent());
+              
+              return _bloc;
+            },
+            child: BlocBuilder<HomeblocBloc, HomeblocState>(
+                builder: (context, state) {
+              if (state is InitialLoad) {
+                _getListSotres();
+                return Column(
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Error de carga"),
-                        FlatButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => Home())
-                              );
-                            },
-                            child: Text("recargar"))
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                      child: Container(
+                        child: _search(),
+                      ),
+                    ),
+                    Divider(
+                      thickness: 5,
+                      color: Colors.black,
+                      indent: 10,
+                      endIndent: 10,
+                    ),
+                    _categoryWidget(),
+                    Container(
+                      child: _productWidget(this.context),
                     )
                   ],
-                ),
-              );
-            }
-          }),
+                );
+              } else if (state is InitialLoadError) {
+                return Scaffold(
+                  body: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Error de carga"),
+                          FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (_) => Home())
+                                );
+                              },
+                              child: Text("recargar"))
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              }
+              else{
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }),
+          ),
         ));
   }
 
@@ -109,18 +116,24 @@ class _HomeState extends State<Home> {
       //margin: EdgeInsets.symmetric(vertical: 5),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * .7,
-      child: GridView(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            childAspectRatio: 4 / 3,
-          ),
-          padding: EdgeInsets.only(left: 20),
-          scrollDirection: Axis.vertical,
-          children: (isSearching ? _textFilter : _lsitStores)
-              .map((product) => ScrollTienda(
-                    tienda: product,
-                  ))
-              .toList()),
+      child: RefreshIndicator(
+        onRefresh: ()async{
+          //regresar
+          _bloc.add(InitEvent());
+        },
+              child: GridView(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              childAspectRatio: 4 / 3,
+            ),
+            padding: EdgeInsets.only(left: 20),
+            scrollDirection: Axis.vertical,
+            children: (isSearching?_textFilter:_lsitStores)
+                .map((product) => ScrollTienda(
+                      tienda: product,
+                    ))
+                .toList()),
+      ),
     );
   }
 
@@ -135,7 +148,7 @@ class _HomeState extends State<Home> {
                 height: 40,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    color: Colors.lightBlueAccent,
+                    color: CARD_COLOR,
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: TextField(
                   decoration: InputDecoration(
@@ -148,18 +161,22 @@ class _HomeState extends State<Home> {
                       )),
                   //mientras haya texto en la barra de busqueda se efectuara el filtro
                   onChanged: (name) {
-                    if (name != "") {
-                      setState(() {
+                     _textFilter.clear();
+                     
+                    setState(() {
+                      if (name != "") {
+                     
+                        isSearching = true;
                         print(name);
                         _textFilter = _lsitStores
                             .where((x) => x.nombre
                                 .toUpperCase()
                                 .contains(name.toUpperCase()))
                             .toList();
-                        isSearching = true;
-                      });
+                        
                     } else
                       isSearching = false;
+                    });
                   },
                 ),
               ),

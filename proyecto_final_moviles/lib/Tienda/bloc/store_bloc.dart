@@ -14,7 +14,7 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
   Store tienda = ReturnStore.t;
   final Firestore _firestore = Firestore.instance;
   List<Producto> _prodList;
-  List<Producto> get getListProd =>_prodList;
+  List<Producto> get getListProd =>_prodList??List();
 
   @override
   StoreState get initialState => StoreInitial();

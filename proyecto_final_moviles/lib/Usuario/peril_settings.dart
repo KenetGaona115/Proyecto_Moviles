@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final_moviles/Utiles/constans.dart';
 
 class PerfilSettings extends StatefulWidget {
   PerfilSettings({Key key}) : super(key: key);
@@ -20,7 +21,7 @@ class _PerfilSettingsState extends State<PerfilSettings> {
         title: Text("Ajustes de perfil"),
       ),
         body: new Container(
-      color: Colors.white,
+      color: CARD_COLOR,
       child: new ListView(
         children: <Widget>[
           Column(
@@ -57,7 +58,7 @@ class _PerfilSettingsState extends State<PerfilSettings> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 new CircleAvatar(
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: PRIMARY_COLOR,
                                   radius: 25.0,
                                   child: new Icon(
                                     Icons.camera_alt,
@@ -310,7 +311,7 @@ class _PerfilSettingsState extends State<PerfilSettings> {
                   child: new RaisedButton(
                 child: new Text("Save"),
                 textColor: Colors.white,
-                color: Colors.green,
+                color: BUTTON_ACEPT_COLOR,
                 onPressed: () {
                   setState(() {
                     _status = true;
@@ -330,7 +331,7 @@ class _PerfilSettingsState extends State<PerfilSettings> {
                   child: new RaisedButton(
                 child: new Text("Cancel"),
                 textColor: Colors.white,
-                color: Colors.red,
+                color: BUTTON_CANCEL_COLOR,
                 onPressed: () {
                   setState(() {
                     _status = true;
@@ -350,7 +351,7 @@ class _PerfilSettingsState extends State<PerfilSettings> {
   Widget _getEditIcon() {
     return new GestureDetector(
       child: new CircleAvatar(
-        backgroundColor: Colors.red,
+        backgroundColor: PRIMARY_COLOR,
         radius: 14.0,
         child: new Icon(
           Icons.edit,

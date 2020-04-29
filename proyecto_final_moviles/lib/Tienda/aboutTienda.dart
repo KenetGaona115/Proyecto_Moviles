@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_final_moviles/Tienda/itemTienda.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:proyecto_final_moviles/Utiles/constans.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:proyecto_final_moviles/maps/mapa.dart';
 
@@ -12,11 +16,31 @@ class AboutStore extends StatefulWidget {
   _AboutStoreState createState() => _AboutStoreState();
 }
 
+CameraPosition _initialPosition = CameraPosition(target: LatLng(10, 30.8025));
+Completer<GoogleMapController> _controller;
+
+void _onMapCreated(GoogleMapController controller) {
+  _controller.complete(controller);
+}
+
+final double _zoom = 10;
+final Set<Marker> _markers = Set();
+
 class _AboutStoreState extends State<AboutStore> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller = Completer();
+  }
+
+  MapType _defaultMapType = MapType.normal;
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BACKGROUND_COLOR,
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Informacion"),
@@ -35,8 +59,24 @@ class _AboutStoreState extends State<AboutStore> {
                     Positioned.fill(
                       bottom: 50,
                       child: Container(
-                        color: Colors.black,
                         height: MediaQuery.of(context).size.height * .2,
+                        child: Stack(
+                          children: <Widget>[
+                            GoogleMap(
+                              mapType: _defaultMapType,
+                              markers: _markers,
+                              onMapCreated: _onMapCreated,
+                              myLocationEnabled: true,
+                              initialCameraPosition: _initialPosition,
+                            ),
+                            IconButton(
+                                icon: Icon(
+                                  Icons.gps_fixed,
+                                  color: PRIMARY_COLOR,
+                                ),
+                                onPressed: _iraubicacion),
+                          ],
+                        ),
                       ),
                     ),
                     Positioned(
@@ -72,9 +112,10 @@ class _AboutStoreState extends State<AboutStore> {
                 itemCount: 5,
                 allowHalfRating: true,
                 itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                unratedColor: SECOND_COLOR,
                 itemBuilder: (context, _) => Icon(
                   Icons.star,
-                  color: Colors.yellow,
+                  color: Color(0xffffc600),
                 ),
                 onRatingUpdate: (rating) {
                   print(rating);
@@ -83,11 +124,11 @@ class _AboutStoreState extends State<AboutStore> {
               ),
               _returnTable(),
               SizedBox(
-                height: 25,
+                height: 20,
               ),
               FlatButton(
-                  color: Colors.blueGrey,
-                  splashColor: Colors.lightBlue,
+                  color: CARD_COLOR,
+                  splashColor: PRIMARY_COLOR,
                   shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                       side: BorderSide(color: Colors.black)),
@@ -103,32 +144,17 @@ class _AboutStoreState extends State<AboutStore> {
                         width: 10,
                       ),
                       Icon(Icons.call),
-                     
-                      
                     ],
                   ),
-                  
-                  
                   onPressed: () {
                     launch("tel://${widget.tienda.tel}");
-                  }),
-                  Row(children: <Widget>[
-                    Text("IR"),
-                     IconButton(
-                icon: Icon(
-                  Icons.zoom_out_map,
-                  size: MediaQuery.of(context).size.height * .05,
-                ),
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) =>Mapa()));
-                })
-                  ],)
-                  
+                  },
+              ),
+              SizedBox(
+                height: 35,
+              )
             ],
-          
           ),
-          
         ),
       ),
     );
@@ -193,5 +219,24 @@ class _AboutStoreState extends State<AboutStore> {
       return "https://cdn1.iconfinder.com/data/icons/the-basics/100/link-broken-chain-512.png";
     } else
       return widget.tienda.logo;
+  }
+
+  Future<void> _iraubicacion() async {
+    double lat = 21.034598;
+    double long = -104.371707;
+    GoogleMapController controller = await _controller.future;
+    controller
+        .animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat, long), _zoom));
+    setState(() {
+      _markers.add(
+        Marker(
+          markerId: MarkerId('pichi'),
+          position: LatLng(lat, long),
+          infoWindow: InfoWindow(
+            title: 'El pichi',
+          ),
+        ),
+      );
+    });
   }
 }

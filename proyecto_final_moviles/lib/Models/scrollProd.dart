@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Producto/pordDetail.dart';
 import 'package:proyecto_final_moviles/Producto/producto.dart';
+import 'package:proyecto_final_moviles/Utiles/constans.dart';
 
 class ScrollProd extends StatefulWidget {
   final Producto prod;
@@ -34,7 +35,7 @@ class _ScrollProdState extends State<ScrollProd> {
               borderRadius: new BorderRadius.circular(18.0),
               side: BorderSide(color: Colors.black),
           ),
-          color: Colors.lightBlueAccent,
+          color: CARD_COLOR,
           elevation: 5,
           child: Row(
             children: <Widget>[
