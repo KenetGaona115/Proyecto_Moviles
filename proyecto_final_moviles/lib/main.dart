@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Home/home.dart';
+import 'package:proyecto_final_moviles/Login/inicio.dart';
 import 'package:proyecto_final_moviles/Pago/met_pagos.dart';
 import 'package:proyecto_final_moviles/Pago/pago.dart';
 import 'package:proyecto_final_moviles/sscreen.dart';
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: Home(),
       ),
+      routes: <String,WidgetBuilder>{
+        '/Inicio':(BuildContext context) =>Inicio()
+      },
     );
   }
 }

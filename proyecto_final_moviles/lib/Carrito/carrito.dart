@@ -41,12 +41,12 @@ class _CarritoState extends State<Carrito> {
     return Scaffold(
       bottomNavigationBar: Row(
         children: <Widget>[
-          SizedBox(width: 10,),
+          SizedBox(
+            width: 10,
+          ),
           Text(
             "TOTAL ",
-            style: TextStyle(
-              fontSize: 20
-            ),
+            style: TEXT_TITLE_STYLE,
           ),
           Icon(
             Icons.attach_money,
@@ -54,22 +54,22 @@ class _CarritoState extends State<Carrito> {
           ),
           Text(
             "$total",
-            style: TextStyle(
-              fontSize: 50
-            ),
+            style: TEXT_TITLE_STYLE,
           ),
-          SizedBox(width: 15,),
+          SizedBox(
+            width: 15,
+          ),
           FlatButton(
             child: Text("Pagar"),
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(18.0),
                 side: BorderSide(color: Colors.black)),
             color: Colors.lightBlue,
-            onPressed: (){
+            onPressed: () {
               carritoListProd.removeRange(0, carritoListProd.length);
               carritoListCant.removeRange(0, carritoListCant.length);
-  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) =>Pago()));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => Pago()));
             },
           )
         ],
@@ -132,8 +132,7 @@ class _CarritoState extends State<Carrito> {
                               TextSpan(
                                 text:
                                     '${carritoListProd[index].nombre.toUpperCase()}\n\n',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
+                                style: TEXT_TITLE_STYLE,
                               ),
                             ],
                           ),
@@ -146,7 +145,7 @@ class _CarritoState extends State<Carrito> {
                     onPressed: () {
                       setState(() {
                         _deleteItem(index);
-                         _getTotal();
+                        _getTotal();
                       });
                     },
                   ),
@@ -166,7 +165,12 @@ class _CarritoState extends State<Carrito> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[Text("No hay productos!")],
+        children: <Widget>[
+          Text(
+            "No hay productos!",
+            style: TEXT_TITLE_STYLE,
+          )
+        ],
       ),
     );
   }
@@ -183,10 +187,5 @@ class _CarritoState extends State<Carrito> {
         total += carritoListProd[i].precio * carritoListCant[i];
       }
     });
-  }
-
-   _displaySnackBar(BuildContext context) {
-    final snackBar = SnackBar(content: Text('Compra realizada'));
-    _scaffoldKey.currentState..showSnackBar(snackBar);
   }
 }

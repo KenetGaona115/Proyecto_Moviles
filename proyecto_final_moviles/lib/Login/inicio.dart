@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final_moviles/Login/login.dart';
+import 'package:proyecto_final_moviles/Login/registerpage.dart';
 import 'package:proyecto_final_moviles/Login/registro.dart';
 import 'package:proyecto_final_moviles/Utiles/linePainter.dart';
 
@@ -15,7 +16,7 @@ class Inicio extends StatelessWidget {
 
     _navigateToRegistro() {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Registro()));
+          .push(MaterialPageRoute(builder: (context) => RegisterPage()));
     }
 
     return Scaffold(

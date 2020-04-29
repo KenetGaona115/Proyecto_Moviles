@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final_moviles/Login/inicio.dart';
 import 'package:proyecto_final_moviles/Usuario/peril_settings.dart';
+import 'package:proyecto_final_moviles/Utiles/constans.dart';
 
 class PerfilUser extends StatefulWidget {
   PerfilUser({Key key}) : super(key: key);
@@ -229,6 +231,20 @@ class _PerfilUserState extends State<PerfilUser> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: MaterialButton(
+        color: BUTTON_CANCEL_COLOR,
+        minWidth: MediaQuery.of(context).size.width *3,
+        child: Text(
+          "Cerrar sesion",
+          style: TEXT_TITLE_STYLE,
+        ),
+        onPressed: (){
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            '/Inicio', 
+            (Route<dynamic> route)=>false
+          );
+        }
+      ),
       appBar: AppBar(
         title: Text("Perfil"),
       ),

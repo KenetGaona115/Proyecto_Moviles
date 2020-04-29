@@ -1,29 +1,21 @@
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:proyecto_final_moviles/Home/home.dart';
-
-import 'package:proyecto_final_moviles/Login/page.dart';
-
 import 'package:proyecto_final_moviles/Login/registerpage.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
-
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class Login extends StatefulWidget {
   final String title;
 
   Login({Key key, this.title}) : super(key: key);
-
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<Login> {
   TextEditingController _emailController = TextEditingController();
-
   TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -57,7 +49,7 @@ class _LoginPageState extends State<Login> {
                             keyboardType: TextInputType.text,
                             decoration: new InputDecoration(
                                 labelText: 'Correo',
-                                hintText: 'manuel.vm@gmail.com',
+                                hintText: 'user@gmail.com',
                                 icon: Icon(Icons.email)),
                             onFieldSubmitted: (value) {},
                             validator: (value) {
@@ -154,7 +146,6 @@ class _LoginPageState extends State<Login> {
 
   void Entrar() async {
     FirebaseUser user;
-
     try {
       user = (await _auth.signInWithEmailAndPassword(
               email: _emailController.text, password: _passwordController.text))
@@ -163,23 +154,16 @@ class _LoginPageState extends State<Login> {
       print(e.toString());
     } finally {
       if (user != null) {
-        // sign in successful!
-
         _pushPage(context, Home());
       } else {
-        // sign in unsuccessful
-
         print('salir');
-
-        // ex: prompt the user to try again
-
       }
     }
   }
 }
 
 void _pushPage(BuildContext context, Widget page) {
-  Navigator.of(context).push(
+  Navigator.of(context).pushReplacement(
     MaterialPageRoute<void>(builder: (_) => page),
   );
 }
